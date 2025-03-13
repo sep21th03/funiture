@@ -1,0 +1,2239 @@
+openapi: 3.0.3
+info:
+  title: 'Bán TRANH'
+  description: 'API DOCS'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/cart:
+    get:
+      summary: 'Lấy giỏ hàng của người dùng hiện tại.'
+      operationId: lyGiHngCaNgiDngHinTi
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 3
+                      product_name: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                      product_id: 1
+                      product_hex_id: 1
+                      code: R287
+                      set: 'SET 1 CÂY CỎ'
+                      quantity: 2
+                      discount: 10
+                      size: '40X60 CANVAS'
+                      current_price: 22540
+                      discounted_price: 20286
+                      images:
+                        - assets/img/products/btbhGacYF1_1735273573.webp
+                        - assets/img/products/fzPmcN7ma8_1735273573.webp
+                        - assets/img/products/pRLgncKt2K_1735273573.webp
+                      total_amount: 40572
+                  status: success
+                  message: 'Giỏ hàng'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 3
+                        product_name: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                        product_id: 1
+                        product_hex_id: 1
+                        code: R287
+                        set: 'SET 1 CÂY CỎ'
+                        quantity: 2
+                        discount: 10
+                        size: '40X60 CANVAS'
+                        current_price: 22540
+                        discounted_price: 20286
+                        images:
+                          - assets/img/products/btbhGacYF1_1735273573.webp
+                          - assets/img/products/fzPmcN7ma8_1735273573.webp
+                          - assets/img/products/pRLgncKt2K_1735273573.webp
+                        total_amount: 40572
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 3
+                        product_name:
+                          type: string
+                          example: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                        product_id:
+                          type: integer
+                          example: 1
+                        product_hex_id:
+                          type: integer
+                          example: 1
+                        code:
+                          type: string
+                          example: R287
+                        set:
+                          type: string
+                          example: 'SET 1 CÂY CỎ'
+                        quantity:
+                          type: integer
+                          example: 2
+                        discount:
+                          type: integer
+                          example: 10
+                        size:
+                          type: string
+                          example: '40X60 CANVAS'
+                        current_price:
+                          type: integer
+                          example: 22540
+                        discounted_price:
+                          type: integer
+                          example: 20286
+                        images:
+                          type: array
+                          example:
+                            - assets/img/products/btbhGacYF1_1735273573.webp
+                            - assets/img/products/fzPmcN7ma8_1735273573.webp
+                            - assets/img/products/pRLgncKt2K_1735273573.webp
+                          items:
+                            type: string
+                        total_amount:
+                          type: integer
+                          example: 40572
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Giỏ hàng'
+      tags:
+        - 'Cart Management'
+      security: []
+  /api/auth/google:
+    get:
+      summary: 'Create a new controller instance.'
+      operationId: createANewControllerInstance
+      description: ''
+      parameters: []
+      responses:
+        302:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta http-equiv=\"refresh\" content=\"0;url='https://accounts.google.com/o/oauth2/auth?scope=openid+profile+email&amp;response_type=code&amp;state=1wanNHyfDkWd8jmTKZpb6JGPQIl80pPh7zuxiffN'\" />\n\n        <title>Redirecting to https://accounts.google.com/o/oauth2/auth?scope=openid+profile+email&amp;response_type=code&amp;state=1wanNHyfDkWd8jmTKZpb6JGPQIl80pPh7zuxiffN</title>\n    </head>\n    <body>\n        Redirecting to <a href=\"https://accounts.google.com/o/oauth2/auth?scope=openid+profile+email&amp;response_type=code&amp;state=1wanNHyfDkWd8jmTKZpb6JGPQIl80pPh7zuxiffN\">https://accounts.google.com/o/oauth2/auth?scope=openid+profile+email&amp;response_type=code&amp;state=1wanNHyfDkWd8jmTKZpb6JGPQIl80pPh7zuxiffN</a>.\n    </body>\n</html>"
+      tags:
+        - Endpoints
+      security: []
+  /api/auth/google/callback:
+    get:
+      summary: 'Create a new controller instance.'
+      operationId: createANewControllerInstance
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Endpoints
+      security: []
+  /api/logout:
+    post:
+      summary: ''
+      operationId: postApiLogout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/product-detail/review:
+    post:
+      summary: 'Lưu đánh giá sản phẩm.'
+      operationId: lunhGiSnPhm
+      description: "Phương thức này nhận yêu cầu chứa thông tin đánh giá sản phẩm từ người dùng,\nkiểm tra và xác thực dữ liệu đầu vào bằng lớp `StoreReviewRequest`, sau đó\nchuyển dữ liệu đã xác thực cho `ProductService` để lưu đánh giá."
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: string
+                  description: 'The <code>id</code> of an existing record in the products table.'
+                  example: et
+                  nullable: false
+                rating:
+                  type: integer
+                  description: 'Must be at least 1. Must not be greater than 5.'
+                  example: 1
+                  nullable: false
+                comment:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: yfwsigfqyv
+                  nullable: false
+              required:
+                - product_id
+                - rating
+                - comment
+      security: []
+  /api/order:
+    get:
+      summary: 'Lấy danh sách đơn hàng của người dùng hiện tại.'
+      operationId: lyDanhSchnHngCaNgiDngHinTi
+      description: 'Phương thức này sử dụng `orderService` để lấy danh sách đơn hàng của người dùng hiện tại.'
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/order/detail/{id}':
+    get:
+      summary: 'Lấy chi tiết đơn hàng theo ID.'
+      operationId: lyChiTitnHngTheoID
+      description: 'Phương thức này sử dụng `orderService` để lấy chi tiết đơn hàng dựa trên ID được truyền vào.'
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the detail.'
+        example: quas
+        required: true
+        schema:
+          type: string
+  /api/order/store:
+    post:
+      summary: 'Store a new order in the database.'
+      operationId: storeANewOrderInTheDatabase
+      description: "This method handles the creation of an order, including the generation of the order code,\nstoring order details, updating product stock, and removing items from the cart.\nIt also dispatches a job to notify the user of the order status."
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: et
+                  nullable: false
+                last_name:
+                  type: string
+                  description: ''
+                  example: commodi
+                  nullable: false
+                phone:
+                  type: number
+                  description: ''
+                  example: 0.48989003
+                  nullable: false
+                address:
+                  type: string
+                  description: ''
+                  example: omnis
+                  nullable: false
+                note:
+                  type: string
+                  description: ''
+                  example: null
+                  nullable: true
+                message:
+                  type: string
+                  description: ''
+                  example: null
+                  nullable: true
+                payment_method:
+                  type: string
+                  description: ''
+                  example: '1'
+                  nullable: false
+                  enum:
+                    - '0'
+                    - '1'
+                shipping_fee:
+                  type: string
+                  description: ''
+                  example: null
+                  nullable: true
+                order_details:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: ''
+                        example: numquam
+                        nullable: false
+                      product_hex_id:
+                        type: string
+                        description: 'The <code>id</code> of an existing record in the product_hex table.'
+                        example: asperiores
+                        nullable: false
+                      size_id:
+                        type: string
+                        description: 'The <code>id</code> of an existing record in the product_sizes table.'
+                        example: aliquam
+                        nullable: false
+                      price:
+                        type: number
+                        description: ''
+                        example: 20.03197353
+                        nullable: false
+                      quantity:
+                        type: integer
+                        description: 'Must be at least 1.'
+                        example: 80
+                        nullable: false
+                    required:
+                      - id
+                      - product_hex_id
+                      - size_id
+                      - price
+                      - quantity
+                total_price:
+                  type: number
+                  description: ''
+                  example: 22679.068
+                  nullable: false
+              required:
+                - first_name
+                - last_name
+                - phone
+                - address
+                - payment_method
+                - order_details
+                - total_price
+      security: []
+  '/api/order/update/{id}':
+    post:
+      summary: 'Cập nhật đơn hàng.'
+      operationId: cpNhtnHng
+      description: "Phương thức này nhận yêu cầu cập nhật đơn hàng, xác thực dữ liệu bằng `UpdateOrderRequest`,\nsau đó sử dụng `orderService` để cập nhật đơn hàng dựa trên ID."
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: number
+                  description: ''
+                  example: 12969.648
+                  nullable: false
+                address:
+                  type: string
+                  description: ''
+                  example: esse
+                  nullable: false
+                notes:
+                  type: string
+                  description: ''
+                  example: null
+                  nullable: true
+                name:
+                  type: string
+                  description: ''
+                  example: modi
+                  nullable: false
+              required:
+                - phone
+                - address
+                - name
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the update.'
+        example: fugiat
+        required: true
+        schema:
+          type: string
+  '/api/order/delete/{id}':
+    post:
+      summary: 'Xóa đơn hàng theo ID.'
+      operationId: xanHngTheoID
+      description: 'Phương thức này sử dụng `orderService` để xóa đơn hàng dựa trên ID được truyền vào.'
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the delete.'
+        example: voluptate
+        required: true
+        schema:
+          type: string
+  /api/order/vnpay_payment:
+    post:
+      summary: 'Thanh toán đơn hàng bằng VNPay.'
+      operationId: thanhTonnHngBngVNPay
+      description: "Phương thức này xử lý thanh toán bằng VNPay, tạo URL thanh toán dựa trên dữ liệu đơn hàng\nvà các thông tin bảo mật từ môi trường (env)."
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_id:
+                  type: string
+                  description: 'The <code>code</code> of an existing record in the orders table.'
+                  example: officiis
+                  nullable: false
+                amount:
+                  type: integer
+                  description: ''
+                  example: 8
+                  nullable: false
+                url_return:
+                  type: string
+                  description: 'Must be a valid URL.'
+                  example: 'http://eichmann.com/explicabo-aut-rerum-ut-omnis-ut-voluptatem-consectetur'
+                  nullable: false
+              required:
+                - order_id
+                - amount
+                - url_return
+      security: []
+  /api/user-id:
+    get:
+      summary: ''
+      operationId: getApiUserId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/send-reset-link:
+    post:
+      summary: ''
+      operationId: postApiSendResetLink
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: orion.halvorson@example.org
+                  nullable: false
+              required:
+                - email
+      security: []
+  /api/reset-password:
+    post:
+      summary: ''
+      operationId: postApiResetPassword
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: edna85@example.net
+                  nullable: false
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: J1N_m6
+                  nullable: false
+                token:
+                  type: string
+                  description: ''
+                  example: dolores
+                  nullable: false
+                password_confirmation:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: tglavfsmzmcycwepfhutxpvvujowhrfyefgwpmkiohnn
+                  nullable: false
+              required:
+                - email
+                - password
+                - token
+                - password_confirmation
+      security: []
+  /api/category:
+    get:
+      summary: 'Lấy danh sách tất cả các hãng (categories).'
+      operationId: lyDanhSchTtCCcHngcategories
+      description: "Phương thức này sử dụng `categoryService` để lấy toàn bộ danh sách các hãng từ cơ sở dữ liệu.\nNếu danh sách các hãng tồn tại, phương thức sẽ trả về phản hồi dạng JSON với trạng thái thành công,\nnếu không sẽ trả về thông báo lỗi."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: 'SET 1'
+                      created_at: null
+                      updated_at: null
+                      categories:
+                        -
+                          id: 1
+                          name: 'HOA LÁ'
+                          set_id: 1
+                          created_at: null
+                          updated_at: null
+                        -
+                          id: 2
+                          name: 'CÂY CỎ'
+                          set_id: 1
+                          created_at: null
+                          updated_at: null
+                    -
+                      id: 2
+                      name: 'SET 2'
+                      created_at: null
+                      updated_at: null
+                      categories:
+                        -
+                          id: 3
+                          name: HALLOWEN
+                          set_id: 2
+                          created_at: null
+                          updated_at: null
+                        -
+                          id: 4
+                          name: NOEL
+                          set_id: 2
+                          created_at: null
+                          updated_at: null
+                    -
+                      id: 3
+                      name: 'SET 3'
+                      created_at: null
+                      updated_at: null
+                      categories:
+                        -
+                          id: 5
+                          name: 'HOA LÁ'
+                          set_id: 3
+                          created_at: null
+                          updated_at: null
+                  status: success
+                  message: 'Danh sách hãng'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'SET 1'
+                        created_at: null
+                        updated_at: null
+                        categories:
+                          -
+                            id: 1
+                            name: 'HOA LÁ'
+                            set_id: 1
+                            created_at: null
+                            updated_at: null
+                          -
+                            id: 2
+                            name: 'CÂY CỎ'
+                            set_id: 1
+                            created_at: null
+                            updated_at: null
+                      -
+                        id: 2
+                        name: 'SET 2'
+                        created_at: null
+                        updated_at: null
+                        categories:
+                          -
+                            id: 3
+                            name: HALLOWEN
+                            set_id: 2
+                            created_at: null
+                            updated_at: null
+                          -
+                            id: 4
+                            name: NOEL
+                            set_id: 2
+                            created_at: null
+                            updated_at: null
+                      -
+                        id: 3
+                        name: 'SET 3'
+                        created_at: null
+                        updated_at: null
+                        categories:
+                          -
+                            id: 5
+                            name: 'HOA LÁ'
+                            set_id: 3
+                            created_at: null
+                            updated_at: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'SET 1'
+                        created_at:
+                          type: string
+                          example: null
+                        updated_at:
+                          type: string
+                          example: null
+                        categories:
+                          type: array
+                          example:
+                            -
+                              id: 1
+                              name: 'HOA LÁ'
+                              set_id: 1
+                              created_at: null
+                              updated_at: null
+                            -
+                              id: 2
+                              name: 'CÂY CỎ'
+                              set_id: 1
+                              created_at: null
+                              updated_at: null
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              name:
+                                type: string
+                                example: 'HOA LÁ'
+                              set_id:
+                                type: integer
+                                example: 1
+                              created_at:
+                                type: string
+                                example: null
+                              updated_at:
+                                type: string
+                                example: null
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Danh sách hãng'
+      tags:
+        - Endpoints
+      security: []
+  /api/product-list:
+    get:
+      summary: 'Lấy danh sách tất cả sản phẩm.'
+      operationId: lyDanhSchTtCSnPhm
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      name: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 1
+                          code: R287
+                          sizes:
+                            -
+                              size: '40X60 CANVAS'
+                              price: '22540.00'
+                              stock: 5
+                          galleries:
+                            -
+                              image_path: assets/img/products/btbhGacYF1_1735273573.webp
+                            -
+                              image_path: assets/img/products/fzPmcN7ma8_1735273573.webp
+                            -
+                              image_path: assets/img/products/pRLgncKt2K_1735273573.webp
+                        -
+                          id: 3
+                          code: R30
+                          sizes:
+                            -
+                              size: '30X40 TRÁNG GƯƠNG'
+                              price: '540000.00'
+                              stock: 5
+                          galleries:
+                            -
+                              image_path: assets/img/products/sHPNDvmVRE_1735273588.webp
+                            -
+                              image_path: assets/img/products/DvnBqvdPYI_1735273588.webp
+                    -
+                      id: 7
+                      name: 'Tranh treo tường canvas cao cấp SET1 của REICHTUM - Phòng khách/ Nhà ngủ/ Decor/ Chất vải canvas'
+                      set_category_id: 5
+                      set_category_name: 'SET 3 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 12
+                          code: R381
+                          sizes:
+                            -
+                              size: '60X80 CANVAS'
+                              price: '1800000.00'
+                              stock: -4
+                          galleries:
+                            -
+                              image_path: assets/img/products/2zZ6PbzlBX_1735207194.webp
+                            -
+                              image_path: assets/img/products/RbQcxj7C7D_1735207194.webp
+                        -
+                          id: 13
+                          code: R382
+                          sizes:
+                            -
+                              size: '60X80 CANVAS'
+                              price: '500000.00'
+                              stock: -3
+                          galleries:
+                            -
+                              image_path: assets/img/products/sJFCY4Vd8Z_1735207348.webp
+                            -
+                              image_path: assets/img/products/T7QLZmwpZz_1735207348.webp
+                    -
+                      id: 8
+                      name: 'Et sunt nisi.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 14
+                          code: VN1KDS
+                          sizes:
+                            -
+                              size: L
+                              price: '172.54'
+                              stock: 93
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 10
+                      name: 'Reprehenderit eum est.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 15
+                          code: 1U5BTD
+                          sizes:
+                            -
+                              size: XL
+                              price: '668.98'
+                              stock: 52
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 11
+                      name: 'Asperiores cupiditate ea in.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 16
+                          code: 6TNMIO
+                          sizes:
+                            -
+                              size: L
+                              price: '195.82'
+                              stock: 23
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 13
+                      name: 'Occaecati asperiores eveniet iure.'
+                      set_category_id: 5
+                      set_category_name: 'SET 3 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 17
+                          code: KVRW62
+                          sizes:
+                            -
+                              size: M
+                              price: '717.89'
+                              stock: 30
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 15
+                      name: 'Ea blanditiis ut hic.'
+                      set_category_id: 4
+                      set_category_name: 'SET 2 NOEL'
+                      product_hex:
+                        -
+                          id: 18
+                          code: P9RMVJ
+                          sizes:
+                            -
+                              size: M
+                              price: '389.91'
+                              stock: 63
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 20
+                      name: 'Itaque deserunt cupiditate distinctio.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 19
+                          code: JUHKOO
+                          sizes:
+                            -
+                              size: M
+                              price: '437.30'
+                              stock: 79
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 22
+                      name: 'Eius quos beatae.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 20
+                          code: U6GFCT
+                          sizes:
+                            -
+                              size: S
+                              price: '354.60'
+                              stock: 55
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 23
+                      name: 'At accusantium eveniet.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 21
+                          code: Y6IPVH
+                          sizes:
+                            -
+                              size: XL
+                              price: '630.95'
+                              stock: 78
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 24
+                      name: 'Facilis asperiores numquam iusto.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 22
+                          code: PR9GDZ
+                          sizes:
+                            -
+                              size: M
+                              price: '384.83'
+                              stock: 52
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 27
+                      name: 'Enim ut facere ratione.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 23
+                          code: H06NGK
+                          sizes:
+                            -
+                              size: S
+                              price: '614.85'
+                              stock: 92
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 28
+                      name: 'Ducimus adipisci minus ipsa.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 24
+                          code: EVEUVM
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '8148277.03'
+                              stock: 87
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 29
+                      name: 'Cupiditate minima qui.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 25
+                          code: Q3V7BO
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '6664667.03'
+                              stock: 34
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 30
+                      name: 'Totam iure labore sint.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 26
+                          code: RTSSIU
+                          sizes:
+                            -
+                              size: '30 X 40'
+                              price: '2462592.93'
+                              stock: 73
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 31
+                      name: 'Aliquam iure ut qui repudiandae.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 27
+                          code: DQ0BXU
+                          sizes:
+                            -
+                              size: '60 X 80'
+                              price: '2044729.02'
+                              stock: 76
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 32
+                      name: 'Nostrum neque qui laudantium.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 28
+                          code: UOPKWH
+                          sizes:
+                            -
+                              size: '60 X 80'
+                              price: '531509.78'
+                              stock: 72
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 33
+                      name: 'Quaerat doloribus dicta.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 29
+                          code: 8WPWSO
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '3881939.46'
+                              stock: 41
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 34
+                      name: 'Deleniti corrupti atque consequuntur.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 30
+                          code: KTC7OZ
+                          sizes:
+                            -
+                              size: '60 X 80'
+                              price: '6427627.19'
+                              stock: 56
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 35
+                      name: 'Soluta nulla et.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 31
+                          code: FPBI2S
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '2068554.51'
+                              stock: 10
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 36
+                      name: 'Consequatur quam odio ea.'
+                      set_category_id: 4
+                      set_category_name: 'SET 2 NOEL'
+                      product_hex:
+                        -
+                          id: 32
+                          code: JUYFLS
+                          sizes:
+                            -
+                              size: '30 X 40'
+                              price: '7297432.95'
+                              stock: 90
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 37
+                      name: 'Et ea aut modi.'
+                      set_category_id: 5
+                      set_category_name: 'SET 3 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 33
+                          code: 2ZWBS5
+                          sizes:
+                            -
+                              size: '20 x 30'
+                              price: '2096592.74'
+                              stock: 77
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 38
+                      name: 'Sed quia culpa consequatur eos.'
+                      set_category_id: 4
+                      set_category_name: 'SET 2 NOEL'
+                      product_hex:
+                        -
+                          id: 34
+                          code: KLUAED
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '8180436.58'
+                              stock: 28
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 39
+                      name: 'Pariatur itaque quod.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 35
+                          code: 7F5ETR
+                          sizes:
+                            -
+                              size: '60 X 80'
+                              price: '3688672.20'
+                              stock: 83
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 40
+                      name: 'Voluptatum commodi repudiandae.'
+                      set_category_id: 4
+                      set_category_name: 'SET 2 NOEL'
+                      product_hex:
+                        -
+                          id: 36
+                          code: NGD7FI
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '7841217.52'
+                              stock: 93
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 41
+                      name: 'Asperiores optio sit.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 37
+                          code: LTGANF
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '4887630.05'
+                              stock: 20
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 42
+                      name: 'Qui fugiat non quibusdam.'
+                      set_category_id: 4
+                      set_category_name: 'SET 2 NOEL'
+                      product_hex:
+                        -
+                          id: 38
+                          code: MKWPGF
+                          sizes:
+                            -
+                              size: '20 x 30'
+                              price: '5691719.49'
+                              stock: 56
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 43
+                      name: 'Cum quibusdam voluptas.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 39
+                          code: PRJAUE
+                          sizes:
+                            -
+                              size: '20 x 30'
+                              price: '3619395.44'
+                              stock: 37
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 44
+                      name: 'Rem sequi nesciunt iste.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 40
+                          code: YQAVRO
+                          sizes:
+                            -
+                              size: '60 X 80'
+                              price: '4366933.08'
+                              stock: 24
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 45
+                      name: 'Voluptas quae eos vel.'
+                      set_category_id: 1
+                      set_category_name: 'SET 1 HOA LÁ'
+                      product_hex:
+                        -
+                          id: 41
+                          code: NP3MFU
+                          sizes:
+                            -
+                              size: '60 X 80'
+                              price: '2043451.23'
+                              stock: 79
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 46
+                      name: 'Quibusdam nesciunt.'
+                      set_category_id: 2
+                      set_category_name: 'SET 1 CÂY CỎ'
+                      product_hex:
+                        -
+                          id: 42
+                          code: N29BJW
+                          sizes:
+                            -
+                              size: '20 x 30'
+                              price: '376619.54'
+                              stock: 29
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                    -
+                      id: 47
+                      name: 'Neque consequatur quia in.'
+                      set_category_id: 3
+                      set_category_name: 'SET 2 HALLOWEN'
+                      product_hex:
+                        -
+                          id: 43
+                          code: WBYRGZ
+                          sizes:
+                            -
+                              size: '40 X 60'
+                              price: '7590687.37'
+                              stock: 82
+                          galleries:
+                            -
+                              image_path: assets/img/products/template_img.jpg
+                  status: success
+                  message: 'Danh sách sản phẩm'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        name: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 1
+                            code: R287
+                            sizes:
+                              -
+                                size: '40X60 CANVAS'
+                                price: '22540.00'
+                                stock: 5
+                            galleries:
+                              -
+                                image_path: assets/img/products/btbhGacYF1_1735273573.webp
+                              -
+                                image_path: assets/img/products/fzPmcN7ma8_1735273573.webp
+                              -
+                                image_path: assets/img/products/pRLgncKt2K_1735273573.webp
+                          -
+                            id: 3
+                            code: R30
+                            sizes:
+                              -
+                                size: '30X40 TRÁNG GƯƠNG'
+                                price: '540000.00'
+                                stock: 5
+                            galleries:
+                              -
+                                image_path: assets/img/products/sHPNDvmVRE_1735273588.webp
+                              -
+                                image_path: assets/img/products/DvnBqvdPYI_1735273588.webp
+                      -
+                        id: 7
+                        name: 'Tranh treo tường canvas cao cấp SET1 của REICHTUM - Phòng khách/ Nhà ngủ/ Decor/ Chất vải canvas'
+                        set_category_id: 5
+                        set_category_name: 'SET 3 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 12
+                            code: R381
+                            sizes:
+                              -
+                                size: '60X80 CANVAS'
+                                price: '1800000.00'
+                                stock: -4
+                            galleries:
+                              -
+                                image_path: assets/img/products/2zZ6PbzlBX_1735207194.webp
+                              -
+                                image_path: assets/img/products/RbQcxj7C7D_1735207194.webp
+                          -
+                            id: 13
+                            code: R382
+                            sizes:
+                              -
+                                size: '60X80 CANVAS'
+                                price: '500000.00'
+                                stock: -3
+                            galleries:
+                              -
+                                image_path: assets/img/products/sJFCY4Vd8Z_1735207348.webp
+                              -
+                                image_path: assets/img/products/T7QLZmwpZz_1735207348.webp
+                      -
+                        id: 8
+                        name: 'Et sunt nisi.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 14
+                            code: VN1KDS
+                            sizes:
+                              -
+                                size: L
+                                price: '172.54'
+                                stock: 93
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 10
+                        name: 'Reprehenderit eum est.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 15
+                            code: 1U5BTD
+                            sizes:
+                              -
+                                size: XL
+                                price: '668.98'
+                                stock: 52
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 11
+                        name: 'Asperiores cupiditate ea in.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 16
+                            code: 6TNMIO
+                            sizes:
+                              -
+                                size: L
+                                price: '195.82'
+                                stock: 23
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 13
+                        name: 'Occaecati asperiores eveniet iure.'
+                        set_category_id: 5
+                        set_category_name: 'SET 3 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 17
+                            code: KVRW62
+                            sizes:
+                              -
+                                size: M
+                                price: '717.89'
+                                stock: 30
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 15
+                        name: 'Ea blanditiis ut hic.'
+                        set_category_id: 4
+                        set_category_name: 'SET 2 NOEL'
+                        product_hex:
+                          -
+                            id: 18
+                            code: P9RMVJ
+                            sizes:
+                              -
+                                size: M
+                                price: '389.91'
+                                stock: 63
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 20
+                        name: 'Itaque deserunt cupiditate distinctio.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 19
+                            code: JUHKOO
+                            sizes:
+                              -
+                                size: M
+                                price: '437.30'
+                                stock: 79
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 22
+                        name: 'Eius quos beatae.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 20
+                            code: U6GFCT
+                            sizes:
+                              -
+                                size: S
+                                price: '354.60'
+                                stock: 55
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 23
+                        name: 'At accusantium eveniet.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 21
+                            code: Y6IPVH
+                            sizes:
+                              -
+                                size: XL
+                                price: '630.95'
+                                stock: 78
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 24
+                        name: 'Facilis asperiores numquam iusto.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 22
+                            code: PR9GDZ
+                            sizes:
+                              -
+                                size: M
+                                price: '384.83'
+                                stock: 52
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 27
+                        name: 'Enim ut facere ratione.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 23
+                            code: H06NGK
+                            sizes:
+                              -
+                                size: S
+                                price: '614.85'
+                                stock: 92
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 28
+                        name: 'Ducimus adipisci minus ipsa.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 24
+                            code: EVEUVM
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '8148277.03'
+                                stock: 87
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 29
+                        name: 'Cupiditate minima qui.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 25
+                            code: Q3V7BO
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '6664667.03'
+                                stock: 34
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 30
+                        name: 'Totam iure labore sint.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 26
+                            code: RTSSIU
+                            sizes:
+                              -
+                                size: '30 X 40'
+                                price: '2462592.93'
+                                stock: 73
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 31
+                        name: 'Aliquam iure ut qui repudiandae.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 27
+                            code: DQ0BXU
+                            sizes:
+                              -
+                                size: '60 X 80'
+                                price: '2044729.02'
+                                stock: 76
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 32
+                        name: 'Nostrum neque qui laudantium.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 28
+                            code: UOPKWH
+                            sizes:
+                              -
+                                size: '60 X 80'
+                                price: '531509.78'
+                                stock: 72
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 33
+                        name: 'Quaerat doloribus dicta.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 29
+                            code: 8WPWSO
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '3881939.46'
+                                stock: 41
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 34
+                        name: 'Deleniti corrupti atque consequuntur.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 30
+                            code: KTC7OZ
+                            sizes:
+                              -
+                                size: '60 X 80'
+                                price: '6427627.19'
+                                stock: 56
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 35
+                        name: 'Soluta nulla et.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 31
+                            code: FPBI2S
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '2068554.51'
+                                stock: 10
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 36
+                        name: 'Consequatur quam odio ea.'
+                        set_category_id: 4
+                        set_category_name: 'SET 2 NOEL'
+                        product_hex:
+                          -
+                            id: 32
+                            code: JUYFLS
+                            sizes:
+                              -
+                                size: '30 X 40'
+                                price: '7297432.95'
+                                stock: 90
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 37
+                        name: 'Et ea aut modi.'
+                        set_category_id: 5
+                        set_category_name: 'SET 3 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 33
+                            code: 2ZWBS5
+                            sizes:
+                              -
+                                size: '20 x 30'
+                                price: '2096592.74'
+                                stock: 77
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 38
+                        name: 'Sed quia culpa consequatur eos.'
+                        set_category_id: 4
+                        set_category_name: 'SET 2 NOEL'
+                        product_hex:
+                          -
+                            id: 34
+                            code: KLUAED
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '8180436.58'
+                                stock: 28
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 39
+                        name: 'Pariatur itaque quod.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 35
+                            code: 7F5ETR
+                            sizes:
+                              -
+                                size: '60 X 80'
+                                price: '3688672.20'
+                                stock: 83
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 40
+                        name: 'Voluptatum commodi repudiandae.'
+                        set_category_id: 4
+                        set_category_name: 'SET 2 NOEL'
+                        product_hex:
+                          -
+                            id: 36
+                            code: NGD7FI
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '7841217.52'
+                                stock: 93
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 41
+                        name: 'Asperiores optio sit.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 37
+                            code: LTGANF
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '4887630.05'
+                                stock: 20
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 42
+                        name: 'Qui fugiat non quibusdam.'
+                        set_category_id: 4
+                        set_category_name: 'SET 2 NOEL'
+                        product_hex:
+                          -
+                            id: 38
+                            code: MKWPGF
+                            sizes:
+                              -
+                                size: '20 x 30'
+                                price: '5691719.49'
+                                stock: 56
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 43
+                        name: 'Cum quibusdam voluptas.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 39
+                            code: PRJAUE
+                            sizes:
+                              -
+                                size: '20 x 30'
+                                price: '3619395.44'
+                                stock: 37
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 44
+                        name: 'Rem sequi nesciunt iste.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 40
+                            code: YQAVRO
+                            sizes:
+                              -
+                                size: '60 X 80'
+                                price: '4366933.08'
+                                stock: 24
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 45
+                        name: 'Voluptas quae eos vel.'
+                        set_category_id: 1
+                        set_category_name: 'SET 1 HOA LÁ'
+                        product_hex:
+                          -
+                            id: 41
+                            code: NP3MFU
+                            sizes:
+                              -
+                                size: '60 X 80'
+                                price: '2043451.23'
+                                stock: 79
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 46
+                        name: 'Quibusdam nesciunt.'
+                        set_category_id: 2
+                        set_category_name: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          -
+                            id: 42
+                            code: N29BJW
+                            sizes:
+                              -
+                                size: '20 x 30'
+                                price: '376619.54'
+                                stock: 29
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                      -
+                        id: 47
+                        name: 'Neque consequatur quia in.'
+                        set_category_id: 3
+                        set_category_name: 'SET 2 HALLOWEN'
+                        product_hex:
+                          -
+                            id: 43
+                            code: WBYRGZ
+                            sizes:
+                              -
+                                size: '40 X 60'
+                                price: '7590687.37'
+                                stock: 82
+                            galleries:
+                              -
+                                image_path: assets/img/products/template_img.jpg
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                        set_category_id:
+                          type: integer
+                          example: 2
+                        set_category_name:
+                          type: string
+                          example: 'SET 1 CÂY CỎ'
+                        product_hex:
+                          type: array
+                          example:
+                            -
+                              id: 1
+                              code: R287
+                              sizes:
+                                -
+                                  size: '40X60 CANVAS'
+                                  price: '22540.00'
+                                  stock: 5
+                              galleries:
+                                -
+                                  image_path: assets/img/products/btbhGacYF1_1735273573.webp
+                                -
+                                  image_path: assets/img/products/fzPmcN7ma8_1735273573.webp
+                                -
+                                  image_path: assets/img/products/pRLgncKt2K_1735273573.webp
+                            -
+                              id: 3
+                              code: R30
+                              sizes:
+                                -
+                                  size: '30X40 TRÁNG GƯƠNG'
+                                  price: '540000.00'
+                                  stock: 5
+                              galleries:
+                                -
+                                  image_path: assets/img/products/sHPNDvmVRE_1735273588.webp
+                                -
+                                  image_path: assets/img/products/DvnBqvdPYI_1735273588.webp
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              code:
+                                type: string
+                                example: R287
+                              sizes:
+                                type: array
+                                example:
+                                  -
+                                    size: '40X60 CANVAS'
+                                    price: '22540.00'
+                                    stock: 5
+                                items:
+                                  type: object
+                                  properties:
+                                    size:
+                                      type: string
+                                      example: '40X60 CANVAS'
+                                    price:
+                                      type: string
+                                      example: '22540.00'
+                                    stock:
+                                      type: integer
+                                      example: 5
+                              galleries:
+                                type: array
+                                example:
+                                  -
+                                    image_path: assets/img/products/btbhGacYF1_1735273573.webp
+                                  -
+                                    image_path: assets/img/products/fzPmcN7ma8_1735273573.webp
+                                  -
+                                    image_path: assets/img/products/pRLgncKt2K_1735273573.webp
+                                items:
+                                  type: object
+                                  properties:
+                                    image_path:
+                                      type: string
+                                      example: assets/img/products/btbhGacYF1_1735273573.webp
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Danh sách sản phẩm'
+      tags:
+        - Endpoints
+      security: []
+  '/api/product-detail/{id}':
+    get:
+      summary: 'Hiển thị thông tin sản phẩm theo ID.'
+      operationId: hinThThngTinSnPhmTheoID
+      description: ''
+      parameters: []
+      responses:
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'No query results for model [App\Models\Product].'
+                properties:
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\Product].'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the product detail.'
+        example: molestiae
+        required: true
+        schema:
+          type: string
+  /api/reviews:
+    get:
+      summary: 'Lấy danh sách các đánh giá sản phẩm.'
+      operationId: lyDanhSchCcnhGiSnPhm
+      description: "Phương thức này nhận yêu cầu và chuyển nó đến `ProductService` để lấy danh sách\nđánh giá sản phẩm từ cơ sở dữ liệu."
+      parameters: []
+      responses:
+        500:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Server Error'
+                properties:
+                  message:
+                    type: string
+                    example: 'Server Error'
+      tags:
+        - Endpoints
+      security: []
+  '/api/review/{id}':
+    get:
+      summary: 'Lấy danh sách đánh giá theo ID sản phẩm.'
+      operationId: lyDanhSchnhGiTheoIDSnPhm
+      description: "Phương thức này nhận ID sản phẩm và lấy các đánh giá liên quan đến sản phẩm đó\nthông qua `ProductService`."
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: []
+                  status: success
+                  message: 'Lấy đánh giá thành công!'
+                properties:
+                  data:
+                    type: array
+                    example: []
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Lấy đánh giá thành công!'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the review.'
+        example: accusamus
+        required: true
+        schema:
+          type: string
+  /api/reviewsall:
+    get:
+      summary: 'Lấy toàn bộ đánh giá sản phẩm.'
+      operationId: lyTonBnhGiSnPhm
+      description: 'Phương thức này trả về toàn bộ các đánh giá sản phẩm hiện có thông qua `ProductService`.'
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 1
+                      product_id: 1
+                      user_id: 1
+                      rating: 5
+                      comment: aaaaaa
+                      created_at: '2024-12-19 17:11:57'
+                      updated_at: null
+                      product:
+                        id: 1
+                        name: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                      user:
+                        id: 1
+                        name: admin
+                        avt_url: null
+                  status: success
+                  message: 'Lấy đánh giá thành công!'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 1
+                        product_id: 1
+                        user_id: 1
+                        rating: 5
+                        comment: aaaaaa
+                        created_at: '2024-12-19 17:11:57'
+                        updated_at: null
+                        product:
+                          id: 1
+                          name: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                        user:
+                          id: 1
+                          name: admin
+                          avt_url: null
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        product_id:
+                          type: integer
+                          example: 1
+                        user_id:
+                          type: integer
+                          example: 1
+                        rating:
+                          type: integer
+                          example: 5
+                        comment:
+                          type: string
+                          example: aaaaaa
+                        created_at:
+                          type: string
+                          example: '2024-12-19 17:11:57'
+                        updated_at:
+                          type: string
+                          example: null
+                        product:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: 'Tranh treo tường tráng gương SET1 của REICHTUM - Decor phòng ngủ/ Chất vải canvas/ Độ bền cao'
+                        user:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 1
+                            name:
+                              type: string
+                              example: admin
+                            avt_url:
+                              type: string
+                              example: null
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Lấy đánh giá thành công!'
+      tags:
+        - Endpoints
+      security: []
+  /api/some-endpoint:
+    post:
+      summary: ''
+      operationId: postApiSomeEndpoint
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+tags:
+  -
+    name: 'Cart Management'
+    description: ''
+  -
+    name: Endpoints
+    description: ''
