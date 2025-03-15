@@ -283,28 +283,33 @@ const CateMenu = [
 const DashboardAsideMenu = [
     {
       icon: "fas fa-th-large",
-      name: "Dashboard",
-      slug: ""
+      name: "Tổng quan",
+      slug: "/dashboard"
     },
     {
+        icon: "fas fa-shopping-basket",
+        name: "Giỏ hàng",
+        slug: "/dashboard/cart"
+      },
+    {
       icon: "fas fa-shopping-basket",
-      name: "Orders",
-      slug: "orders"
+      name: "Đơn hàng",
+      slug: "/dashboard/orders"
     },
     {
       icon: "fas fa-file-download",
       name: "Downloads",
-      slug: "downloads"
+      slug: "/dashboard/downloads"
     },
     {
       icon: "fas fa-home",
-      name: "Addresses",
-      slug: "addresses-edit"
+      name: "Thông tin nhận hàng",
+      slug: "/dashboard/addresses-edit"
     },
     {
       icon: "fas fa-user",
-      name: "Account Details",
-      slug: "account-details" 
+      name: "Đổi mật khẩu",
+      slug: "/dashboard/account-details" 
     }
 ]
 

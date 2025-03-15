@@ -161,7 +161,7 @@ class OrderController extends Controller
         $vnp_HashSecret = env('VNP_HASH_SECRET');
 
         $vnp_TxnRef = $request->order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = "Thanh toán đơn hàng tại MobileSell";
+        $vnp_OrderInfo = "Thanh toán đơn hàng tại FUNITURE";
         $vnp_OrderType = 'billpayment';
         $vnp_Amount = $request->amount * 100;
         $vnp_Locale = 'vn';

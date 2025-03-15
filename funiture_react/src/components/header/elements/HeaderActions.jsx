@@ -69,17 +69,20 @@ if (!isClient) return null;
           <div
             className={`my-account-dropdown ${accountDropdown ? "open" : ""}`}
           >
-            <span className="title">QUICKLINKS</span>
+            <span className="title">Tiện ích</span>
             {isAuthenticated ? (
         <ul>
           <li>
-            <Link href="/dashboard">My Account</Link>
+            <Link href="/dashboard">Tài khoản của tôi</Link>
           </li>
           <li>
-            <Link href="/dashboard/orders">Orders</Link>
+            <Link href="/dashboard/cart">Giỏ hàng</Link>
           </li>
           <li>
-            <Link href="/dashboard/account-details">Settings</Link>
+            <Link href="/dashboard/account-details">Cài đặt</Link>
+          </li>
+          <li>
+            <Link href="/sign-in" className="axil-btn btn-bg-primary">Đăng xuất</Link>
           </li>
         </ul>
       ) : (

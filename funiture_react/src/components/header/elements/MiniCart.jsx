@@ -1,28 +1,30 @@
 import Image from "next/image";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCartItem, miniCartHandler } from "@/store/slices/productSlice";
 
 const MiniCart = () => {
-const dispatch = useDispatch();
-const getProducts = useSelector((state) => state.productData);
-const router = useRouter();
+  const dispatch = useDispatch();
+  const getProducts = useSelector((state) => state.productData);
+  const router = useRouter();
 
-const removeCartHandler = (data) => {
+  const removeCartHandler = (data) => {
     dispatch(removeCartItem(data));
-}
-const cartHandler = (data) => {
-  dispatch(miniCartHandler(data));
-}
+  };
+  const cartHandler = (data) => {
+    dispatch(miniCartHandler(data));
+  };
 
-const miniCartFooterBtnHandler = (data) => {
-	router.push(data);
-	dispatch(miniCartHandler(false));
-}
+  const miniCartFooterBtnHandler = (data) => {
+    router.push(data);
+    dispatch(miniCartHandler(false));
+  };
 
-return (
+  return (
     <>
-      <div className={`cart-dropdown ${getProducts?.isMinicartOpen ? "open" : ""}`}>
+      <div
+        className={`cart-dropdown ${getProducts?.isMinicartOpen ? "open" : ""}`}
+      >
         <div className="cart-content-wrap">
           <div className="cart-header">
             <h2 className="header-title">Cart review</h2>
@@ -36,56 +38,70 @@ return (
           <div className="cart-body">
             <ul className="cart-item-list">
               {/* {getProducts.cartItems.length > 0 ? ( */}
-                {/* getProducts.cartItems.map((data) => ( */}
-                  <li className="cart-item" >
-                    <div className="item-img">
-						<Image
-							// src={data.thumbnail}
-							alt="product"
-							height={100}
-							width={100}
-						/>
-						<button className="close-btn" onClick={() => removeCartHandler(data)}>
-							<i className="fas fa-times"></i>
-						</button>
-                    </div>
-                    <div className="item-content">
-                      <h3 className="item-title">
-                        {/* {data.title} */}
-                      </h3>
-                      <div className="item-price">
-                        <span className="currency-symbol">$</span>
-                        {/* {data.salePrice
+              {/* getProducts.cartItems.map((data) => ( */}
+              <li className="cart-item">
+                <div className="item-img">
+                  <Image
+                    src={
+                      "https://rukminim2.flixcart.com/image/850/1000/kxp0mfk0/poster/t/t/8/medium-avtar-3d-hollywood-movie-avtaar-3d-matte-finish-poster-original-imaga36q5sxgadsv.jpeg?q=90&crop=false"
+                    }
+                    alt="product"
+                    height={100}
+                    width={100}
+                  />
+
+                  <button
+                    className="close-btn"
+                    onClick={() => removeCartHandler(data)}
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+                <div className="item-content">
+                  <h3 className="item-title">{/* {data.title} */}</h3>
+                  <div className="item-price">
+                    <span className="currency-symbol">$</span>
+                    {/* {data.salePrice
                           ? data.salePrice
                           : data.price} */}
-                        {/* <strong>x{data.cartQuantity}</strong> */}
-                      </div>
-                      <div className="pro-qty item-quantity">
-                        <input type="number" className="quantity-input" />
-                      </div>
-                    </div>
-                  </li>
-                {/* )) */}
+                    {/* <strong>x{data.cartQuantity}</strong> */}
+                  </div>
+                  <div className="pro-qty item-quantity">
+                    <input type="number" className="quantity-input" />
+                  </div>
+                </div>
+              </li>
+              {/* )) */}
               {/* ) : ( */}
-                {/* <h4 className="text-center">Your cart are empty</h4> */}
+              {/* <h4 className="text-center">Your cart are empty</h4> */}
               {/* )} */}
             </ul>
           </div>
           {/* {getProducts.cartItems.length > 0 ? ( */}
-            <div className="cart-footer">
-              <h3 className="cart-subtotal">
-                <span className="subtotal-title">Subtotal:</span>
-                <span className="subtotal-amount">
-                  {/* ${getProducts.cartTotalAmount} */}
-                </span>
-              </h3>
-              <div className="group-btn">
-				<button className="axil-btn btn-bg-primary viewcart-btn" onClick={() => miniCartFooterBtnHandler("/cart")}>View Cart</button>
-				<button className="axil-btn btn-bg-secondary checkout-btn" onClick={() => miniCartFooterBtnHandler("/checkout")}>Checkout</button>
-              </div>
+          <div className="cart-footer">
+            <h3 className="cart-subtotal">
+              <span className="subtotal-title">Subtotal:</span>
+              <span className="subtotal-amount">
+                {/* ${getProducts.cartTotalAmount} */}
+              </span>
+            </h3>
+            <div className="group-btn">
+              <button
+                className="axil-btn btn-bg-primary viewcart-btn"
+                onClick={() => miniCartFooterBtnHandler("/cart")}
+              >
+                View Cart
+              </button>
+              <button
+                className="axil-btn btn-bg-secondary checkout-btn"
+                onClick={() => miniCartFooterBtnHandler("/checkout")}
+              >
+                Checkout
+              </button>
             </div>
+          </div>
           {/* ) : ( */}
-            ""
+          ""
           {/* )} */}
         </div>
       </div>

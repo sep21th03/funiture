@@ -22,12 +22,10 @@ import ProductSeven from '@/components/product/ProductSeven';
 import WhoWeAre from '@/components/about/WhoWeAre';
 import ProductThree from '@/components/product/ProductThree';
 import ProductOne from '@/components/product/ProductOne';
-import { useAppSelector } from '@/store/hooks';
 import {fetchProductData} from '@/services/product';
 import { useEffect, useState } from 'react';
 
 const HomeFurniture = () => {
-    const user = useAppSelector((state) => state.auth.user); 
     const pathname = usePathname();
     const split = pathname.split("/");
     const pageCategory = split[split.length - 1];
@@ -43,11 +41,6 @@ const HomeFurniture = () => {
         };
         fetchData();
     }, [pageCategory]);
-    // const furnitureProduct = products.filter(data => slugify(data.pCate) === pageCategory);
-    // const transparentProduct = ProductsData.filter(data => slugify(data.pCate) === pageCategory && data.thumbnailTransparent === true);
-    // const furnitureProduct = products
-    // .sort((a, b) => b.discount - a.discount)
-    // .slice(0, 10);
     const furnitureProduct = [...products].sort((a, b) => b.discount - a.discount).slice(0, 10);
     const transparentProduct = [...products].sort((a, b) => a.price - b.price).slice(0, 10);
     const exploreProduct = mapInSlices(furnitureProduct, 8);

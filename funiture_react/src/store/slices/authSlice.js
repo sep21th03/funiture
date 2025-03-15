@@ -15,7 +15,7 @@ const refreshToken = typeof window !== "undefined" ? localStorage.getItem("refre
 const user = accessToken ? safeJwtDecode(accessToken)?.user : null;
 
 const initialState = {
-  user: user,
+  user: user || null,
   access_token: accessToken,
   refresh_token: refreshToken,
   isAuthenticated: !!accessToken,
@@ -72,8 +72,11 @@ const authSlice = createSlice({
     setAuthenticated: (state, action) => {
         state.isAuthenticated = action.payload;
     },
+    setAddress: (state, action) => {
+      state.address = action.payload;
+    },
   },
 });
 
-export const { logIn, logOut, refreshUserToken, setAuthenticated  } = authSlice.actions;
+export const { logIn, logOut, refreshUserToken, setAuthenticated, setAddress } = authSlice.actions;
 export default authSlice.reducer;

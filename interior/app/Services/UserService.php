@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserService extends BaseService
 {
@@ -133,8 +134,33 @@ class UserService extends BaseService
     {
         return Auth::user();
     }
-    public function getUserId()
+    public function getUserId($id)
     {
-        return response()->json(['user_id' => Auth::user()->id]);
+        return User::where('id', $id)->first();
+    }
+    public function getUserbyEmail($email)
+    {
+        return User::where('email', $email)->first();
+    }
+    public function updateAddress($data)
+    {
+        $id = $data['id'];
+        $user = User::find($id);
+        $user->address = $data['address'];
+        $user->name = $data['name'];
+        $user->phone = $data['phone'];
+        $user->save();
+        return $user;
+    }
+    public function changePassword($data)
+    {
+        $email = $data['email'];
+        $user = User::where('email', $email)->first();
+        if (!Hash::check($data['current_password'], $user->password)) {
+            return response()->json(['message' => 'Mật khẩu cũ không đúng!'], 400);
+        }
+        $user->password = Hash::make($data['new_password']);
+        $user->save();
+        return response()->json(['message' => 'Đổi mật khẩu thành công!'], 200);
     }
 }

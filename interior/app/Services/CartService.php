@@ -45,6 +45,7 @@ class CartService extends BaseService
                 'quantity' => $item->quantity,
                 'discount' => $item->productHex->product->discount,
                 'size' => $size->size,
+                'size_id' => $size->id,
                 'current_price' => (float) $size->price,
                 'discounted_price' => (float) $discountedPrice,
                 'images' => $item->productHex->galleries->map(fn($gallery) => $gallery->image_path),
@@ -135,8 +136,21 @@ class CartService extends BaseService
      * @param int $sizeId ID kích thước sản phẩm.
      * @return bool
      */
-    public function deleteByUserId($userId, $productHex, $sizeId)
+    public function deleteByUserId($userId, $cartId)
     {
-        return Cart::where('user_id', $userId)->where('product_hex_id', $productHex)->where('size_id', $sizeId)->delete();
+        $cart = Cart::where('user_id', $userId)
+            ->where('id', $cartId)
+            ->first();
+
+        if (!$cart) {
+            return false;
+        }
+
+        $result = $cart->delete();
+        if ($result == false) {
+            return false;
+        }
+
+        return true;
     }
 }

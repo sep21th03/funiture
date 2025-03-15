@@ -19,17 +19,23 @@ class OrderService extends BaseService
 
     public function getListByUser()
     {
-        $user = Auth()->user();
-        return $this->model->where('user_id', $user->id)->orderBy('id', 'desc')->get()->map(function ($order) {
+    $user = Auth()->user();
+    return $this->model->where('user_id', $user->id)
+        ->orderBy('id', 'desc')
+        ->get()
+        ->map(function ($order) {
             return [
                 'id' => $order->id,
                 'code' => $order->code,
-                'created_at' => $order->created_at->format('H:i d/m/Y '),
+                'created_at' => $order->created_at instanceof \Carbon\Carbon 
+                    ? $order->created_at->format('H:i d/m/Y') 
+                    : (is_string($order->created_at) ? $order->created_at : 'N/A'),
                 'status' => Order::STATUS_LABEL[$order->status] ?? 'Đang chờ',
                 'total_price' => $order->total_price,
             ];
         });
     }
+
     public function getDetailOrder($id)
     {
         $order = $this->model->find($id);
@@ -45,7 +51,7 @@ class OrderService extends BaseService
             'total_price' => $order->total_price,
             'note'  => $order->note,
             'message' => $order->message,
-            'created_at' => $order->created_at ? $order->created_at->format('H:i d/m/Y ') : null,
+            'created_at' => $order->created_at ? Carbon::parse($order->created_at)->format('H:i d/m/Y') : null,
             'order_details' => $order->orderDetails->map(function ($orderDetail) {
                 $product = $orderDetail->ProductHex->product;
                 $setCategory = $product->categories;
@@ -72,10 +78,10 @@ class OrderService extends BaseService
             $orderData = [
                 'code' => 'MB' . $user->id . 'P' . time() . substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 2),
                 'user_id' => $user->id,
-                'user_name' => $data['first_name'] . ' ' . $data['last_name'],
-                'phone' => $data['phone'],
-                'address' => $data['address'],
-                'note' => $data['note'] ?? '',
+                'user_name' => $data['id']['name'],
+                'phone' => $data['id']['phone'],
+                'address' => $data['id']['address'],
+                'note' => $data['id']['note'] ?? '',
                 'message' => $data['message'] ?? '',
                 'total_price' => $data['total_price'],
                 'payment_method' => $data['payment_method'],

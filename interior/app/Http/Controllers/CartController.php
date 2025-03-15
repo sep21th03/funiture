@@ -7,6 +7,8 @@ use App\Http\Requests\Api\Cart\UpdateCartRequest;
 use App\Services\CartService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
+use Illuminate\Http\Request;
+
 class CartController extends Controller
 {
     /**
@@ -84,11 +86,23 @@ class CartController extends Controller
      *   "data": []
      * }
      */
-    public function addByMyCart(UpdateCartRequest $request)
+    public function addMyCart(UpdateCartRequest $request)
     {
         $data = $request->validated();
         $myCart = $this->cartService()->addByUserId(Auth::user()->id, $data);
         return jsonResponse($myCart ? 'success' : 'error', $myCart ? 'Cập nhật thành công!' : 'Có lỗi xảy ra, xin vui lòng tải lại trang và thử lại.', $myCart);
+    }
+
+    public function deleteMyCart(Request $request)
+    {
+        $data = $request->validate(
+            [
+                'user_id' => 'required',
+                'cart_id' => 'required'
+            ]
+        );
+        $myCart = $this->cartService()->deleteByUserId($data['user_id'], $data['cart_id']);
+        return jsonResponse($myCart ? 'success' : 'error', $myCart ? 'Xóa thành công!' : 'Có lỗi xảy ra, xin vui lòng tải lại trang và thử lại.', $myCart);
     }
 
     public function cartService()

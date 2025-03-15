@@ -3,10 +3,46 @@ import { useSelector } from "react-redux";
 import Section from "@/components/elements/Section";
 import FooterTwo from "@/components/footer/FooterTwo";
 import HeaderFive from "@/components/header/HeaderFive";
+const fakeOrders = [
+    {
+        orderDate: "2024-03-14",
+        totalAmount: 350,
+        billingAddress: {
+            firstName: "John",
+            lastName: "Doe",
+            companyName: "ABC Corp",
+            street1: "123 Main St",
+            street2: "Apt 4B",
+            city: "New York",
+            country: "USA",
+            phone: "+1 234 567 890",
+            email: "john.doe@example.com",
+            payment: "Credit Card",
+            notes: "Please deliver between 10 AM - 2 PM",
+            shippingDifferent: false
+        },
+        items: [
+            {
+                id: "1",
+                title: "Luxury Sofa",
+                price: 300,
+                salePrice: 250,
+                cartQuantity: 1
+            },
+            {
+                id: "2",
+                title: "Elegant Lamp",
+                price: 80,
+                salePrice: 70,
+                cartQuantity: 2
+            }
+        ]
+    }
+];
 
 const OrderReceived = () => {
-    const orders = useSelector((state) => state.productData.orderItems);
-    const latestOrder = orders[orders.length - 1];
+    const orders =  fakeOrders;
+    const latestOrder = fakeOrders[0];    
     return ( 
         <>
         <HeaderFive />

@@ -9,7 +9,7 @@ const productSlice = createSlice({
         cartQuantityTotal: 0,
         cartTotalAmount: 0,
         wishlistItems: [],
-        // wishListQuantity: 0,
+        wishListQuantity: 0,
         quickView: false,
         quickViewItems: null,
         isMinicartOpen: false,
@@ -26,14 +26,14 @@ const productSlice = createSlice({
             } else {
                 const tempProduct = { 
                     id: action.payload.id,
-                    title: action.payload.title,
-                    thumbnail: action.payload.thumbnail,
-                    salePrice: action.payload.salePrice ?? 0,
+                    name: action.payload.name,
+                    discount: action.payload.discount,
+                    image_path: action.payload.image_path ?? 0,
+                    size: action.payload.size,
                     price: action.payload.price,
-                    productType: action.payload.productType,
+                    product_hex_id: action.payload.product_hex_id,
+                    set_category_name: action.payload.set_category_name,
                     cartQuantity: action.payload.cartQuantity ?? 1,
-                    productSize: action.payload.productSize ?? "",
-                    productColor: action.payload.productColor ?? "",
                 }
                 state.cartItems.push(tempProduct);
                 state.cartQuantityTotal += action.payload.cartQuantity ?? 1;
@@ -82,7 +82,7 @@ const productSlice = createSlice({
                 })
             } else {
                 state.wishlistItems.push(action.payload);
-                // state.wishListQuantity += 1;
+                state.wishListQuantity += 1;
                 Swal.fire({
                     title: action.payload.title,
                     text: 'Added to your Wishlist',
@@ -96,7 +96,7 @@ const productSlice = createSlice({
         removeWishlistItem(state, action) {
             const filteredWishlistItem = state.wishlistItems.filter((wishlistItem) => wishlistItem.id !== action.payload.id);
             state.wishlistItems = filteredWishlistItem;
-            // state.wishListQuantity = state.wishlistItems.length;
+            state.wishListQuantity = state.wishlistItems.length;
         },
         addToQuickView(state, action) {
             state.quickView = action.payload.quickView;

@@ -1,61 +1,65 @@
 "use client";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector } from "@/store/hooks";
 import {
   addToCart,
   addToWishlist,
+  removeWishlistItem,
   addToQuickView,
 } from "@/store/slices/productSlice";
+import axiosInstance from "../../../utils/axiosInstance";
+import { API_ENDPOINT } from "@/services/apis";
+import Swal from "sweetalert2";
 
 const ActionButtons = (props) => {
-  const dispatch = useDispatch();
-  // const getWishlist = useSelector((state) => state.productData.wishlistItems);
-  // const isWishlistAdded = getWishlist.filter((data) => data.id === props.productAction.id);
-
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
+  const user_id = useAppSelector((state) => state.auth.user.id);
+  const quantity = 1;
+  const { product_hex_id, size_id } = props.productAction;
+  const formData = {
+    user_id,
+    product_hex_id,
+    size_id,
+    quantity,
   };
 
-  const handleAddToWishlist = (product) => {
-    dispatch(addToWishlist(product));
+  const handleAddToCart = async () => {
+    try {
+      const response = await axiosInstance.post(API_ENDPOINT.CART.ADD_CART, formData);
+  
+      if (response.data.status === "success") {
+        Swal.fire({
+          title: "Thành công!",
+          text: "Sản phẩm đã được thêm vào giỏ hàng.",
+          icon: "success",
+          timer: 1500, 
+          showConfirmButton: false,
+          timerProgressBar: true,
+        });
+      } else {
+        Swal.fire({
+          title: "Lỗi!",
+          text: "Không thể thêm sản phẩm vào giỏ hàng.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
+      Swal.fire({
+        title: "Lỗi!",
+        text: "Đã xảy ra lỗi, vui lòng thử lại sau.",
+        icon: "error",
+      });
+    }
   };
-
-  const quickViewHandler = (product) => {
-    dispatch(addToQuickView({
-      viewItem: product,
-      quickView: true
-    }));
-  };
-
+  
+  
   return (
     <ul className="cart-action">
-      {props.wishlistBtn && props.productAction.pCate !== "NFT" && (
-        <li className="wishlist">
-          <button onClick={() => handleAddToWishlist(props.productAction)}>
-		  {/* <i className={isWishlistAdded.length === 1 ? "fas fa-heart" : "far fa-heart"} /> */}
-          </button>
-        </li>
-      )}
-      {props.cartBtn && (
         <li className="select-option">
-          {props.productAction.pCate === "NFT" || props.productAction.productType === "variable" ? (
-            <Link href={`/products/${props.productAction.id}`}>
-              Buy Product
-            </Link>
-          ) : (
-            <button onClick={() => handleAddToCart(props.productAction)}>
-              Add to Cart
-            </button>
-          )}
-        </li>
-      )}
-      {props.quickViewBtn && props.productAction.pCate !== "NFT" && (
-        <li className="quickview">
-          <button onClick={() => quickViewHandler(props.productAction)}>
-            <i className="far fa-eye" />
+          <button onClick={() => handleAddToCart(props.productAction)}>
+            Add to Cart
           </button>
         </li>
-      )}
     </ul>
   );
 };

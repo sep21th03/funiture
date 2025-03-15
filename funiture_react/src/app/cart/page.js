@@ -7,9 +7,30 @@ import { slugify } from "@/utils";
 import { removeCartItem, cartQuantityIncrease, cartQuantityDecrease, cartClear, updateCartAmount } from "@/store/slices/productSlice";
 import FooterTwo from "@/components/footer/FooterTwo";
 
+const fakeCartProducts = {
+    cartItems: [
+        {
+            id: "1",
+            title: "Wooden Chair",
+            price: 120,
+            salePrice: 100,
+            cartQuantity: 2,
+            thumbnail: "/images/products/chair.jpg"
+        },
+        {
+            id: "2",
+            title: "Modern Table",
+            price: 200,
+            salePrice: 180,
+            cartQuantity: 1,
+            thumbnail: "/images/products/table.jpg"
+        }
+    ],
+    cartTotalAmount: 380,
+};
 const Cart = () => {
     const dispatch = useDispatch();
-    const cartProducts = useSelector((state) => state.productData);
+    const cartProducts = useSelector((state) => state.productData) || fakeCartProducts;
 
     const removeCartHandler = (data) => {
         dispatch(removeCartItem(data))

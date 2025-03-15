@@ -16,13 +16,13 @@ const ProductThumbnail = (props) => {
   } = props;
   const productImage = attributeImg 
   ? attributeImg 
-  : `http://127.0.0.1:8000/${productThumb.image_path}`;
-
+  : `/${productThumb.image_path}`;
+  const BASE_URL = process.env.NEXT_PUBLIC_IMAGE_API_URL
   return (
     <div className="thumbnail">
       <Link href={`/products/${productThumb.id}`}>
         <Image
-          src={productImage}
+          src={BASE_URL + productImage}
           width={props.width ?? 300}
           height={props.height ?? 300}
           alt={productThumb.name}

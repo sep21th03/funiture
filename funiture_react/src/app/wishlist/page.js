@@ -5,10 +5,30 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeWishlistItem } from "@/store/slices/productSlice";
 import HeaderOne from "@/components/header/HeaderOne";
 import FooterOne from "@/components/footer/FooterTwo";
+const ProductsData = [
+    {
+        id: 1,
+        title: "3D™ wireless headset",
+        thumbnail: "/images/product/product-big-03.png",
+        price: 500,
+        salePrice: 400,
+        wishlist: true,
+    },
+    {
+        id: 2,
+        title: "PS2 DualShock 2 Wireless Controller",
+        thumbnail: "/images/product/electric/product-08.png",
+        price: 49.99,
+        salePrice: 29.99,
+        wishlist: false, 
+    }
+];
+
+export { ProductsData };
 
 const Wishlist = () => {
     const dispatch = useDispatch();
-    const getWishlist = useSelector((state) => state.productData.wishlistItems);
+    const getWishlist = ProductsData.filter((product) => product.wishlist === true);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product));

@@ -1,73 +1,105 @@
 'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import axiosInstance from "@/utils/axiosInstance"; // Import Axios instance
+import { API_ENDPOINT } from "@/services/apis";
+import { useAppSelector } from '@/store/hooks';
 
 const AccountDetails = () => {
-    const [userAccountInfo, setUserAccountInfo] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState(null);
+    const user = useAppSelector((state) => state.auth.user);
+
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
-      } = useForm();
+        reset,
+    } = useForm();
 
-    const userInfoHandler = (data) => {
-        setUserAccountInfo(data);
-    }
+    const onSubmit = async (data) => {
+        setLoading(true);
+        setMessage(null);
+
+        try {
+            const response = await axiosInstance.post(API_ENDPOINT.USER.CHANGE_PASSWORD, {
+                email: user.email,
+                current_password: data.currentPassword,
+                new_password: data.newPassword,
+                new_password_confirmation: data.confirmPassword,
+            });
+
+            if(response.data) {
+                setMessage({ type: "success", text: "Đổi mật khẩu thành công!" });
+                reset();
+            }
+        } catch (error) {
+            setMessage({ type: "error", text: error.response?.data?.message || "Có lỗi xảy ra!" });
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return ( 
         <div className="axil-dashboard-account">
-            <form className="account-details-form" onSubmit={handleSubmit(userInfoHandler)}>
+            <form className="account-details-form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="row">
-                    <div className="col-lg-6">
-                        <div className="form-group">
-                            <label>First Name</label>
-                            <input type="text" className="form-control" {...register('firstName', { required: true })} defaultValue="Annie" />
-                            {errors.firstName && <p className="error">First Name is required.</p>}
-                        </div>
-                    </div>
-                    <div className="col-lg-6">
-                        <div className="form-group">
-                            <label>Last Name</label>
-                            <input type="text" className="form-control" {...register('lastName', { required: true })} defaultValue="Mario" />
-                            {errors.lastName && <p className="error">Last Name is required.</p>}
-                        </div>
-                    </div>
                     <div className="col-12">
-                        <div className="form-group mb--40">
-                            <label>Country/ Region</label>
-                            <select className="select2" {...register('country', { required: true })}>
-                                <option value={1}>United Kindom (UK)</option>
-                                <option value={1}>United States (USA)</option>
-                                <option value={1}>United Arab Emirates (UAE)</option>
-                                <option value={1}>Australia</option>
-                            </select>
-                            {errors.country && <p className="error">Country Name is required.</p>}
-                            <p className="b3 mt--10">This will be how your name will be displayed in the account section and in reviews</p>
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <h5 className="title">Password Change</h5>
+                        <h5 className="title">Đổi mật khẩu</h5>
+
+                        {message && (
+                            <div className={`alert ${message.type === "success" ? "alert-success" : "alert-danger"}`}>
+                                {message.text}
+                            </div>
+                        )}
+
                         <div className="form-group">
-                            <label>Password</label>
-                            <input type="password" className="form-control" defaultValue={1201112131415} />
+                            <label>Mật khẩu cũ</label>
+                            <input 
+                                type="password" 
+                                className="form-control" 
+                                {...register("currentPassword", { required: "Vui lòng nhập mật khẩu cũ!" })} 
+                            />
+                            {errors.currentPassword && <p className="error">{errors.currentPassword.message}</p>}
                         </div>
+
                         <div className="form-group">
-                            <label>New Password</label>
-                            <input type="password" className="form-control" />
+                            <label>Mật khẩu mới</label>
+                            <input 
+                                type="password" 
+                                className="form-control" 
+                                {...register("newPassword", { 
+                                    required: "Vui lòng nhập mật khẩu mới!",
+                                    minLength: { value: 6, message: "Mật khẩu phải ít nhất 6 ký tự!" }
+                                })} 
+                            />
+                            {errors.newPassword && <p className="error">{errors.newPassword.message}</p>}
                         </div>
+
                         <div className="form-group">
-                            <label>Confirm New Password</label>
-                            <input type="password" className="form-control" />
+                            <label>Nhập lại mật khẩu</label>
+                            <input 
+                                type="password" 
+                                className="form-control" 
+                                {...register("confirmPassword", { 
+                                    required: "Vui lòng nhập lại mật khẩu!",
+                                    validate: (value) => value === watch("newPassword") || "Mật khẩu không khớp!"
+                                })} 
+                            />
+                            {errors.confirmPassword && <p className="error">{errors.confirmPassword.message}</p>}
                         </div>
+
                         <div className="form-group mb--0">
-                            <input type="submit" className="axil-btn" defaultValue="Save Changes" />
+                            <button type="submit" className="axil-btn" disabled={loading}>
+                                {loading ? "Đang xử lý..." : "Lưu thay đổi"}
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-
-     );
+    );
 }
  
 export default AccountDetails;

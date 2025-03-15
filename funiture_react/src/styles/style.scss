@@ -183,3 +183,9 @@ RTL Style
   .flex-1 {
     flex: 1;
   }
+
+  .axil-dashboard-aside.__custom {
+    border: 1px solid var(--color-light);
+    padding: 20px 15px 20px !important;
+    border-radius: 6px;
+}

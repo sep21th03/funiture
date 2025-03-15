@@ -36,12 +36,13 @@ Route::middleware('jwt.auth')->group(function () {
 //     Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 //     Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 // });
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('jwt.auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::get('cart', [CartController::class, 'getMyCart']);
     Route::post('cart/update', [CartController::class, 'updateMyCart']);
     Route::post('cart/add', [CartController::class, 'addMyCart']);
+    Route::post('cart/delete', [CartController::class, 'deleteMyCart']);
 
     Route::post('product-detail/review', [ProductController::class, 'storeProductReview']);
 
@@ -52,8 +53,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('order/delete/{id}', [OrderController::class,'delete']);
     Route::post('order/vnpay_payment', [OrderController::class,'vnpayPayment']);
 
-    Route::get('/user-id', [UserController::class, 'getUserId']);
+    Route::get('/user-id/{id}', [UserController::class, 'getUserId']);
     Route::get('/user', [UserController::class, 'getUsers']);
+    Route::post('/getUserbyEmail', [UserController::class, 'getUserbyEmail']);
+    Route::post('/user/update-address', [UserController::class, 'updateAddress']);
+    Route::post('/user/change-password', [UserController::class, 'changePassword']);
 });
 
 Route::post('send-reset-link', [AuthController::class, 'sendResetLinkEmail']);

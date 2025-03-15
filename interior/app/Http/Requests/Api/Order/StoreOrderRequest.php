@@ -25,11 +25,10 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone' => ['required', 'numeric', new PhoneNumberRule()],
-            'address' => 'required',
-            'note' => 'nullable',
+            'id.name' => 'required',
+            'id.phone' => ['required', 'numeric', new PhoneNumberRule()],
+            'id.address' => 'required',
+            'id.note' => 'nullable',
             'message' => 'nullable',
             'payment_method' => 'required|in:0,1',
             'shipping_fee' => 'nullable',
@@ -44,11 +43,10 @@ class StoreOrderRequest extends FormRequest
     }
     function message() {
         return [
-            'first_name.required' => 'Vui lòng nhập họ',
-            'last_name.required' => 'Vui lòng nhập tên',
-            'phone.required' => 'Vui lòng nhập số điện thoại',
-            'phone.numeric' => 'Số điện thoại không hợp lệ',
-            'address.required' => 'Vui lòng nhập địa chỉ',
+            'id.name.required' => 'Vui lòng nhập tên',
+            'id.phone.required' => 'Vui lòng nhập số điện thoại',
+            'id.phone.numeric' => 'Số điện thoại không hợp lệ',
+            'id.address.required' => 'Vui lòng nhập địa chỉ',
             'payment_method.required' => 'Vui lòng chọn phương thức thanh toán',
             'order_details.required' => 'Vui lòng chọn sản phẩm',
             'order_details.*.product_hex_id.required' => 'Vui lòng nhập sản phẩm',

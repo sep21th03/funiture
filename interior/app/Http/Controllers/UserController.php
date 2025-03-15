@@ -55,11 +55,57 @@ class UserController extends Controller
             : jsonResponse('error', 'Không tìm thấy người dùng!');
     }
 
-    public function getUserId()
+    public function getUserId($id)
     {
-        $result = $this->userService->getUserId();
+        $result = $this->userService->getUserId($id);
         return $result 
             ? jsonResponse('success', 'id người dùng', ['id' => $result] )
             : jsonResponse('error', 'Không tìm thấy người dùng!');
+    }
+    public function getUserbyEmail(Request $request)
+    {
+        $email = $request->email;
+        $user = $this->userService->getUserbyEmail($email);
+    
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+    
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'avt_url' => $user->avt_url,
+            'address' => $user->address,
+        ]);
+    }
+    public function updateAddress(Request $request)
+    {
+        $data = $this->validate($request, [
+            'id' => 'required|integer',
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+        ]);
+        $user = $this->userService->updateAddress($data);
+        return response()->json([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'avt_url' => $user->avt_url,
+            'address' => $user->address,
+        ]);
+    }
+    public function changePassword(Request $request)
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+        $user = $this->userService->changePassword($data);
+        return $user;
     }
 }

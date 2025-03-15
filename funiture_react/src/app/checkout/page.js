@@ -10,12 +10,32 @@ import FooterTwo from "@/components/footer/FooterTwo";
 import HeaderFive from "@/components/header/HeaderFive";
 import ServiceTwo from "@/components/services/ServiceTwo";
 import { addToOrder } from '@/store/slices/productSlice';
-
+const fakeCartProducts = {
+    cartItems: [
+        {
+            id: "1",
+            title: "Wooden Chair",
+            price: 120,
+            salePrice: 100,
+            cartQuantity: 2,
+            thumbnail: "/images/products/chair.jpg"
+        },
+        {
+            id: "2",
+            title: "Modern Table",
+            price: 200,
+            salePrice: 180,
+            cartQuantity: 1,
+            thumbnail: "/images/products/table.jpg"
+        }
+    ],
+    cartTotalAmount: 380,
+};
 const Checkout = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const [openShippingForm, setopenShippingForm] = useState(false);
-    const cartProducts = useSelector((state) => state.productData);
+    const cartProducts = fakeCartProducts;
 
     const ShippingInfoHandler = (e) => {
         setopenShippingForm(e.target.checked)

@@ -86,6 +86,7 @@ class ProductController extends Controller
                 'product_hex_id' => $firstProductHex?->id ?? null, // ID product_hex
                 'code' => $firstProductHex?->hex_code ?? null, // Mã sản phẩm
                 'size' => $firstSize?->size ?? null, // Tên size đầu tiên
+                'size_id' => $firstSize?->id ?? null,
                 'price' => $firstSize?->price ?? null, // Giá của size đầu tiên
                 'stock' => $firstSize?->stock ?? null, // Tồn kho
                 'image_path' => $firstGallery?->image_path ?? null, // Ảnh đầu tiên
