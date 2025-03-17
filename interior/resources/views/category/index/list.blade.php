@@ -56,12 +56,19 @@ Danh sách danh mục
     background: #ffffff;
     box-shadow: inset 0 0 3px #ffffff;
   }
+  .btn-sm:first-child {
+    opacity: 0;
+    display: none;
+  }
+  #list_category td {
+    background-color: #f1f1f1;
+  }
 </style>
 <div class="content">
   <div class="mb-9">
     <div class="row g-2 mb-4">
       <div class="col-auto">
-        <h2 class="mb-0">Brands</h2>
+        <h2 class="mb-0">Loại sản phẩm</h2>
       </div>
     </div>
     <div id="categories" data-list='{"valueNames":["customer","email","total-orders","total-spent","city","last-seen","last-order"],"page":10,"pagination":true}'>

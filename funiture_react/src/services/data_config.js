@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = 'https://tcophar.click/'
+const BASE_URL = 'https://codetify.funiture.local/'
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
