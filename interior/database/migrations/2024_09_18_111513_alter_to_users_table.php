@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone', 15);
             $table->string('address', 255)->nullable();
-            $table->string('avatar', 255)->nullable();
+            $table->string('avt_url', 255)->nullable();
         });
     }
 

@@ -4,11 +4,16 @@ export const API_ENDPOINT = {
         REGISTER: "/auth/register",
         LOGOUT: "/auth/logout",
         REFRESH_TOKEN: "/auth/refresh",
+        FORGOT_PASSWORD: "/auth/forgot-password",
     },
     PRODUCT: {
         GET_PRODUCTS: "/product-list",
         GET_PRODUCT: "/product-detail",
         GET_RELATED_PRODUCTS: "/product-related",
+        GET_PRODUCT_BY_CATEGORY: "/product-set",
+    },
+    CATEGORY: {
+        GET_CATEGORIES: "/category",
     },
     ORDER: {
         GET_ORDERS: "/order",

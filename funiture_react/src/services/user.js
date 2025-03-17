@@ -20,3 +20,4 @@ export const fetchUserById = async (id) => {
         throw error;
     }
 }
+

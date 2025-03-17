@@ -48,8 +48,8 @@
                 {
                     data: "",
                     render: function (data, type, row) {
-                        const imagePath = row.product_hex && row.product_hex[0] && row.product_hex[0].galleries && row.product_hex[0].galleries[0]
-                            ? row.product_hex[0].galleries[0].image_path
+                        const imagePath = row.image_path
+                            ? row.image_path
                             : 'default-image.png';
                         return `<img src="${base_url}/${imagePath}" alt="Product Image" style="width: 50px; height: auto;">`;
                     },

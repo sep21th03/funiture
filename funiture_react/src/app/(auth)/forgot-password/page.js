@@ -1,9 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import {forgotPassword} from '@/services/auth';
+import { useRouter } from "next/navigation";
+
 
 const ForgotPassword = () => {
-    const [forgotEmail, setForgotEmail] = useState(null);
+    const router = useRouter();
+    const [forgotEmailError, setForgotEmailError] = useState(false);
+
     const {
         register,
         handleSubmit,
@@ -11,7 +16,8 @@ const ForgotPassword = () => {
       } = useForm();
 
     const onSubmit = (data) => {
-        setForgotEmail(data);
+        setForgotEmailError(null);
+        forgotPassword(data, router, setForgotEmailError);
     }
     return ( 
         <div className="axil-signin-form">
@@ -25,7 +31,8 @@ const ForgotPassword = () => {
             </div>
             <div className="form-group">
                 <button type="submit" className="axil-btn btn-bg-primary submit-btn">Send Reset Instructions</button>
-                {forgotEmail && <p className="success">Reset Instruction Send successfully</p>}
+                {forgotEmailError?.success && <p className="success">{forgotEmailError.success}</p>}
+                {forgotEmailError?.error && <p className="error">{forgotEmailError.error}</p>}
             </div>
         </form>
     </div>

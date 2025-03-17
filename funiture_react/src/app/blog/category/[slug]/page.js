@@ -28,7 +28,7 @@ const BlogCategory = ({params}) => {
                 <div className="row g-5">
                     {postsByCate.map((data) => (
                         <div className="col-md-4" key={data.id}>
-                            <BlogTwo posts={data}/>
+                            <BlogTwo posts={data}/> 
                         </div>
                     ))}
                 </div> 

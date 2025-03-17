@@ -15,6 +15,7 @@ use App\Http\Requests\Api\Auth\ChangePasswordRequest;
 use Illuminate\Support\Str;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -306,104 +307,28 @@ class AuthController extends Controller
         }
     }
 
-    public function redirectToGoogle()
-    {
-        try {
-            return Socialite::driver('google')
-                ->redirect();
-        } catch (\Exception $e) {
-            return redirect()->route('login')
-                ->with('error', 'Không thể kết nối với Google. Vui lòng thử lại sau.');
-        }
-    }
-
-
-
-    public function handleGoogleCallback()
-    {
-        try {
-            $googleUser = Socialite::driver('google')->user();
-
-            $user = User::updateOrCreate(
-                ['email' => $googleUser->getEmail()],
-                [
-                    'name' => $googleUser->getName(),
-                    'google_id' => $googleUser->getId(),
-                    'avatar' => $googleUser->getAvatar(),
-                ]
-            );
-
-            if (!$user->google_id) {
-                $user->google_id = $googleUser->getId();
-                $user->save();
-            }
-
-            // Đăng nhập user
-            Auth::login($user, true);
-
-            return redirect()->intended('/dashboard')
-                ->with('success', 'Đăng nhập thành công!');
-        } catch (\Exception $e) {
-            return redirect()->route('login')
-                ->with('error', 'Đã có lỗi xảy ra trong quá trình đăng nhập. Vui lòng thử lại.');
-        }
-    }
-
-
-    public function changePassword(ChangePasswordRequest $request)
-    {
-        $data = $request->validated();
-        $user = Auth::user();
-        if (!Hash::check($data['current_password'], $user->password)) {
-            return jsonResponse(2, message: "Mật khẩu cũ không chính xác.");
-        }
-        $user->update(['password' => Hash::make($data['password'])]);
-        if ($user) {
-            $user->tokens()->delete();
-            return jsonResponse(0, message: "Thay đổi mật khẩu thành công.");
-        } else {
-            return jsonResponse(2, message: "Có lỗi xảy ra, vui lòng thử lại sau.");
-        }
-    }
-    function sendResetLinkEmail(Request $request)
-    {
-        $data = $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        $user = User::where('email', $data['email'])->first();
-        if (!$user) {
-            return jsonResponse(1, message: "Không tìm thấy người dùng");
-        }
-        $status = Password::sendResetLink([
-            'email' => $user->email,
-        ]);
-        \Log::info($status);
-
-        if ($status == Password::RESET_LINK_SENT) {
-            return jsonResponse(0, message: "Yêu cầu đã được gửi");
-        }
-    }
-    function resetPassword(Request $request)
+    public function sendResetPasswordEmail(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-            'token' => 'required',
-            "password_confirmation" => 'required|min:6',
+            'email' => 'required|email|exists:users,email',
+        ], [
+            'email.required' => 'Vui lòng nhập email.',
+            'email.email' => 'Email không đúng định dạng.',
+            'email.exists' => 'Email không tồn tại trong hệ thống.',
         ]);
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
+        
+        $user = User::where('email', $request->email)->first();
 
-                $user->save();
+        $newPassword = Str::random(8);
 
-                event(new PasswordReset($user));
-            }
-        );
-        return jsonResponse($status === Password::PASSWORD_RESET ? 0 : 1, $status);
+        $user->password = Hash::make($newPassword);
+        $user->save();
+
+        Mail::to($user->email)->send(new \App\Mail\ResetPasswordMail($user, $newPassword));
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Mật khẩu mới đã được gửi đến email của bạn.',
+        ]);
     }
 }

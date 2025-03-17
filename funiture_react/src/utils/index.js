@@ -10,6 +10,26 @@ const slugify = function (text) {
 		.replace(/-+$/, '') // Trim - from end of text
 }
 
+export function slugifyTV(text) {
+	return text
+	  .toLowerCase()
+	  .normalize("NFD") // Chuyển đổi ký tự có dấu thành ký tự cơ bản
+	  .replace(/[\u0300-\u036f]/g, "") // Xóa dấu
+	  .replace(/đ/g, "d") // Thay thế "đ" thành "d"
+	  .replace(/[^a-z0-9 -]/g, "") // Xóa ký tự đặc biệt
+	  .replace(/\s+/g, "-") // Thay khoảng trắng thành dấu "-"
+	  .replace(/-+/g, "-"); // Xóa dấu "-" liên tiếp
+  }
+
+  export function unSlugifyTV(slug, categories) {
+	const foundCategory = categories.find((cat) => slugifyTV(cat.name) === slug);
+	return foundCategory ? foundCategory.id : null;
+  }
+  export function unSlugifyTVName(slug, categories) {
+	const foundCategory = categories.find((cat) => slugifyTV(cat.name) === slug);
+	return foundCategory ? foundCategory.name : slug.replace(/-/g, " ");
+  }
+  
 const unSlugify = function (text) {
 	return text
 		.toString()

@@ -25,6 +25,8 @@ Route::post('/login', [AdminController::class, 'postlogin'])->name('api.postlogi
 Route::get('/admin/login', [AdminController::class, 'login'])->name('api.login');
 Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/register', [AuthController::class, 'register']);
+Route::post('auth/forgot-password', [AuthController::class, 'sendResetPasswordEmail']);
+
 
 Route::middleware('jwt.auth')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logoutUser']);
@@ -67,6 +69,7 @@ Route::get('category', [CategoryController::class, 'index']);
 Route::get('product-list', [ProductController::class, 'index']);
 Route::get('product-detail/{id}', [ProductController::class, 'show']);
 Route::get('product-related/{id}', [ProductController::class, 'getProductsByCategory']);
+Route::get('product-set/{id}', [ProductController::class, 'getProductsBySet']);
 
 
 Route::get('reviews', [ProductController::class, 'getReviews']);

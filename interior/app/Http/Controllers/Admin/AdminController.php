@@ -23,19 +23,16 @@ class AdminController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Thông tin đăng nhập không chính xác',
-            ]);
+            return redirect()->back()->with('error', 'Thông tin đăng nhập không chính xác');
         }
 
         $user = User::getByUsername($validatedData['email']);
-        if (!Hash::check($validatedData['password'], $user->password)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Mật khẩu không hợp lệ',
-            ]);
-        }
+        // if (!Hash::check($validatedData['password'], $user->password)) {
+        //     return response()->json([
+        //         'status' => 'error',
+        //         'message' => 'Mật khẩu không hợp lệ',
+        //     ]);
+        // }
 
         $existingToken = $user->tokens->first();
         $check_token = User::getByUsername($validatedData['email']);

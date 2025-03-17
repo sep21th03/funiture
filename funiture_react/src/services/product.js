@@ -30,3 +30,24 @@ export const fetchRelatedProduct = async (id) => {
         throw error;
     }
 };
+
+
+export const fetchCategory = async () => {
+    try {
+        const response = await axiosInstance.get(API_ENDPOINT.CATEGORY.GET_CATEGORIES);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error;
+    }
+}
+
+export const fetchProductByCategory = async (category) => {
+    try {
+        const response = await axiosInstance.get(`${API_ENDPOINT.PRODUCT.GET_PRODUCT_BY_CATEGORY}/${category}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching product by category:", error);
+        throw error;
+    }
+}

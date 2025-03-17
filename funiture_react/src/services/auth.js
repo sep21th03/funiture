@@ -22,7 +22,7 @@ export const login = async (data, dispatch, router, setLoginError) => {
   }
 };
 
-export const register = async (data, dispatch, router, setRegisterError) => {
+export const registerUser  = async (data, dispatch, router, setRegisterError) => {
   try {
     const response = await axiosInstance.post(`${API_ENDPOINT.AUTH.REGISTER}`, data);
     
@@ -44,17 +44,13 @@ export const register = async (data, dispatch, router, setRegisterError) => {
 
 export const logout = async (dispatch, router) => {
   try {
-    // Gọi API logout nếu cần
     await axiosInstance.post(`${API_ENDPOINT.AUTH.LOGOUT}`);
     
-    // Xóa trạng thái auth trong Redux và localStorage
     dispatch(logOut());
     
-    // Chuyển hướng về trang đăng nhập
     router.push("/auth/login");
   } catch (error) {
     console.error("Logout error:", error);
-    // Vẫn logout ở phía client ngay cả khi API thất bại
     dispatch(logOut());
     router.push("/auth/login");
   }
@@ -83,8 +79,26 @@ export const refreshUserToken = async (dispatch) => {
     return false;
   } catch (error) {
     console.error("Token refresh error:", error);
-    // Nếu refresh token không hợp lệ, logout
     dispatch(logOut());
     return false;
   }
 };
+
+export const forgotPassword = async (data, route, setForgotEmailError) => {
+  try {
+    const response = await axiosInstance.post(`${API_ENDPOINT.AUTH.FORGOT_PASSWORD}`, data);
+    
+    if (response.data.status === "success") {
+      setForgotEmailError({ success: "Mật khẩu mới đã được gửi đến email của bạn." });
+      setTimeout(() => {
+        route.push("/sign-in");
+      }, 2000);
+    } else {
+      setForgotEmailError({ error: response.data.message || "Có lỗi xảy ra!" });
+    }
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    const errorMessage = error.response?.data?.message || "Đã xảy ra lỗi khi gửi yêu cầu.";
+    setForgotEmailError({ error: errorMessage });
+  }
+}

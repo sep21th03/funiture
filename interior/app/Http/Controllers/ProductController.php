@@ -153,7 +153,12 @@ class ProductController extends Controller
             : jsonResponse('error', 'Không tìm thấy danh sách sản phẩm!');
     }
     
-
+    public function getProductsBySet($id){
+        $products = $this->productService->getProductsBySet($id);
+        return $products
+            ? jsonResponse('success', 'Danh sách sản phẩm', $this->prepareProductsData($products))
+            : jsonResponse('error', 'Không tìm thấy danh sách sản phẩm!');
+    }
 
     public function update(UpdateProductRequest $request)
     {
