@@ -56,10 +56,6 @@ Danh sách danh mục
     background: #ffffff;
     box-shadow: inset 0 0 3px #ffffff;
   }
-  .btn-sm:first-child {
-    opacity: 0;
-    display: none;
-  }
   #list_category td {
     background-color: #f1f1f1;
   }
