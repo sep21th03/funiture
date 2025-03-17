@@ -30,7 +30,7 @@ Dashboard
         <div class="row g-4">
             <div class="col-12 col-xxl-12">
                 <div class="mb-8">
-                    <h3 class="mb-2 mbs-title-statistic" class="font-size: 1.5625rem;">Quick stats</h3>
+                    <h3 class="mb-2 mbs-title-statistic" class="font-size: 1.5625rem;">Thống kê nhanh</h3>
                 </div>
                 <div class="row align-items-center g-4">
                     <div class="col-12 col-md-4">
