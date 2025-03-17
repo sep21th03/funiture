@@ -30,7 +30,7 @@ Dashboard
         <div class="row g-4">
             <div class="col-12 col-xxl-12">
                 <div class="mb-8">
-                    <h3 class="mb-2 mbs-title-statistic" class="font-size: 1.5625rem;">Quick stats</h3>
+                    <h3 class="mb-2 mbs-title-statistic" class="font-size: 1.5625rem;">Thống kê nhanh</h3>
                 </div>
                 <div class="row align-items-center g-4">
                     <div class="col-12 col-md-4">
@@ -82,7 +82,7 @@ Dashboard
                 <hr class="bg-body-secondary mb-6 mt-4" />
                 <div class="row flex-between-center mb-4 g-3">
                     <div class="col-auto">
-                        <h3>Total products sold</h3>
+                        <h3>Sản phẩm đã bán</h3>
                     </div>
                 </div>
                 <div id="echarts-orders" style="min-height:320px;width:100%"></div>
