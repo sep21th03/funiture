@@ -27,6 +27,8 @@ const CategoryFurniture = () => {
     fetchData();
   }, [pageCategory]);
 
+
+
   return (
     <Section pClass="axil-categorie-area" sectionPadding="pt--30">
       <SlickSlider
