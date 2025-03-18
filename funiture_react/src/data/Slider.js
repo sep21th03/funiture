@@ -66,19 +66,19 @@ const FurnitureSlider = [
     {
         subTitle: "Hot Deal In This Week",
         subIcon: "fas fa-fire",
-        title: "Neon Stylish Sofa Chair",
+        title: "Nội thất ngoài trời",
         thumbnail: "/images/product/product-100.webp"
     },
     {
         subTitle: "Hot Deal In This Week",
         subIcon: "fas fa-fire",
-        title: "Sofa Chair with Lamp",
+        title: "Nội thất phòng ngủ",
         thumbnail: "/images/product/product-101.webp"
     },
     {
         subTitle: "Hot Deal In This Week",
         subIcon: "fas fa-fire",
-        title: "Neon Stylish Sofa Chair",
+        title: "Nội thất ngoài trời",
         thumbnail: "/images/product/product-102.webp"
     },
 ]

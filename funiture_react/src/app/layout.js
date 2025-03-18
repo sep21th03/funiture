@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@/styles/style.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ChatBotComponent from "@/components/widget/ChatbotComponent";
 
 const RootLayout = ({ children }) => {
   useEffect(() => {
@@ -28,6 +29,7 @@ const RootLayout = ({ children }) => {
           <QueryClientProvider client={queryClient}>
             <Providers>{children}</Providers>
           </QueryClientProvider>
+          <ChatBotComponent />
       </body>
     </html>
   );
