@@ -59,85 +59,84 @@ STYLESHEET INDEXING
 
 ======================================================== --*/
 
-
 /* ===============================
 Default Styles
 ================================== */
-@import '/node_modules/bootstrap/scss/bootstrap.scss';
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
 
-@import 'default/variables';
-@import 'default/mixins';
-@import 'default/reset';
-@import 'default/typography';
-@import 'default/extend';
-@import 'default/animations';
-@import 'default/shortcode';
-@import 'default/common';
-@import 'default/forms';
+@import "default/variables";
+@import "default/mixins";
+@import "default/reset";
+@import "default/typography";
+@import "default/extend";
+@import "default/animations";
+@import "default/shortcode";
+@import "default/common";
+@import "default/forms";
 
 /* ===============================
 Elements Styles
 ================================== */
 
-@import 'elements/about';
-@import 'elements/back-to-top';
-@import 'elements/breadcrumb';
-@import 'elements/button';
-@import 'elements/categories';
-@import 'elements/contact';
-@import 'elements/countdown';
-@import 'elements/error';
-@import 'elements/newsletter';
-@import 'elements/pagination';
-@import 'elements/poster';
-@import 'elements/price-slider';
-@import 'elements/privacy-policy';
-@import 'elements/section';
-@import 'elements/service';
-@import 'elements/slick';
-@import 'elements/slider';
-@import 'elements/social';
-@import 'elements/team';
-@import 'elements/testimonial';
-@import 'elements/video';
-@import 'elements/splash';
+@import "elements/about";
+@import "elements/back-to-top";
+@import "elements/breadcrumb";
+@import "elements/button";
+@import "elements/categories";
+@import "elements/contact";
+@import "elements/countdown";
+@import "elements/error";
+@import "elements/newsletter";
+@import "elements/pagination";
+@import "elements/poster";
+@import "elements/price-slider";
+@import "elements/privacy-policy";
+@import "elements/section";
+@import "elements/service";
+@import "elements/slick";
+@import "elements/slider";
+@import "elements/social";
+@import "elements/team";
+@import "elements/testimonial";
+@import "elements/video";
+@import "elements/splash";
 
 /* ===============================
 Header Styles
 ================================== */
-@import 'header/header-top';
-@import 'header/header';
-@import 'header/nav';
+@import "header/header-top";
+@import "header/header";
+@import "header/nav";
 
 /* ===============================
 Shop Styles
 ================================== */
 
-@import 'shop/header-cart';
-@import 'shop/shop';
-@import 'shop/product-details';
-@import 'shop/checkout';
-@import 'shop/my-account';
+@import "shop/header-cart";
+@import "shop/shop";
+@import "shop/product-details";
+@import "shop/checkout";
+@import "shop/my-account";
 
 /* ===============================
 Blog Styles
 ================================== */
 
-@import 'blog/blog-list';
-@import 'blog/blog-single';
-@import 'blog/comment';
-@import 'blog/sidebar';
+@import "blog/blog-list";
+@import "blog/blog-single";
+@import "blog/comment";
+@import "blog/sidebar";
 
 /* ===============================
 Footer Styles
 ================================== */
 
-@import 'footer/footer';
+@import "footer/footer";
 
 /* ===============================
 Spacing
 ================================== */
-@import 'default/spacing';
+@import "default/spacing";
 
 /* ===============================
 Dark Style
@@ -155,43 +154,55 @@ RTL Style
     align-items: center;
     justify-content: center;
     z-index: 9999;
-  }
-  
-  .spinner {
+}
+
+.spinner {
     width: 50px;
     height: 50px;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-top: 5px solid #007bff;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .product-title {
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.product-title {
     display: -webkit-box;
-    -webkit-line-clamp: 3; 
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 4.5em; 
-  }
+    max-height: 4.5em;
+}
 
-  .flex-1 {
+.flex-1 {
     flex: 1;
-  }
+}
 
-  .axil-dashboard-aside.__custom {
+.axil-dashboard-aside.__custom {
     border: 1px solid var(--color-light);
     padding: 20px 15px 20px !important;
     border-radius: 6px;
 }
 .categrie-product-2 {
-  height: 100px;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
+    height: 100px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+@media (min-width: 1150px) {
+    .axil-product.product-style-seven .product-content .title {
+        font-size: 16px !important;
+    }
+    .axil-product.product-style-seven .product-content {
+      padding: 20px 20px !important;
+    }
 }
