@@ -54,7 +54,7 @@ const styles = `
     background-color: #3313E8FF;
   }
 
-  button{
+  .chatbot-container button{
   width: 30px;
   margin-right: 10px;
   }
