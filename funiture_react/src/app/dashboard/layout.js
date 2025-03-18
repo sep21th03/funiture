@@ -27,7 +27,7 @@ const DahsboardLayout = ({ children }) => {
                 <div className="media">
                   <div className="thumbnail">
                     <Image
-                      src={user.avatar}
+                      src={user?.avatar}
                       height={70}
                       width={70}
                       alt="avatar"

@@ -37,7 +37,6 @@ const CategoryProduct = ({ params }) => {
       fetchProduct();
     }
   }, [catParam, Category]);
-console.log(Category);
   return (
     <>
       <Breadcrumb

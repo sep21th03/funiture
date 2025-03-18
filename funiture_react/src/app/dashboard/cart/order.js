@@ -44,8 +44,7 @@ const OrderDetails = ({
           responseData = JSON.parse(jsonMatch[0]);
         }
       }
-
-      console.log("Parsed response:", responseData);
+      console.log("Response data:", responseData);
 
       if (responseData.status.trim().toLowerCase() === "success") {
         const orderDetails = responseData.data;
