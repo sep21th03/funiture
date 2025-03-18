@@ -32,6 +32,10 @@ const styles = `
     cursor: pointer;
   }
 
+  .chatbot-container .rsc-ts-bubble {
+  color: white
+  }
+
   .chatbot-toggle {
     position: fixed;
     z-index: 1000000;
@@ -77,12 +81,14 @@ const ChatBotComponent = () => {
 
   // Hàm gọi API Flask
   const handleUserMessage = async (message) => {
+    
     setLoading(true)
     try {
       const response = await axios.post('http://127.0.0.1:8000/ask', {
         message: message,
       })
       setLoading(false)
+      
       return response.data.answer || 'Không có phản hồi từ máy chủ!'
     } catch (error) {
       setLoading(false)
@@ -91,7 +97,12 @@ const ChatBotComponent = () => {
   }
 
   // Custom Component để hiển thị phản hồi từ API
-  const BotResponse = ({ previousValue, steps }) => {
+
+  
+  const BotResponse = (props) => {
+    const previousValue = props.steps['user-input'].value;
+    console.log(previousValue);
+    
     const [responseMessage, setResponseMessage] = useState('Đang xử lý...')
 
     useEffect(() => {
