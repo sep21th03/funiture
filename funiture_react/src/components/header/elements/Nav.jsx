@@ -7,50 +7,50 @@ import { HeaderMenu } from "@/data/Menu";
 import { mobileMenu } from "@/store/slices/menuSlice";
 
 const Nav = () => {
-	const dispatch = useDispatch();
-	const menuOption = useSelector((state) => state.menu);
-	const [windowWidth, setWindowWidth] = useState();
+  const dispatch = useDispatch();
+  const menuOption = useSelector((state) => state.menu);
+  const [windowWidth, setWindowWidth] = useState();
 
-	const mobileMneuHandler = (data) => {
-		dispatch(mobileMenu(data));
-	};
+  const mobileMneuHandler = (data) => {
+    dispatch(mobileMenu(data));
+  };
 
-	const mobileMenuToggleHandler = () => {
-		let windowWidthCheck = window.innerWidth;
-		setWindowWidth(windowWidthCheck);
-		window.addEventListener("resize", (e) => {
-			let windowWidth = window.innerWidth;
-			setWindowWidth(windowWidth);
-		});
-		let subMenuToggler = document.getElementsByClassName("submenu-link");
-		if (windowWidth < 992) {
-			for (let i = 0; i < subMenuToggler.length; i++) {
-				let element = subMenuToggler[i];
-				element.addEventListener("click", function (e) {
-				e.preventDefault();
-				if (element.offsetParent.classList.contains("open")) {
-					for (let j = 0; j < subMenuToggler.length; j++) {
-					const subElem = subMenuToggler[j];
-					subElem.offsetParent.classList.remove("open");
-					subElem.nextSibling.style.display = "none";
-					}
-				} else {
-					for (let j = 0; j < subMenuToggler.length; j++) {
-						const subElem = subMenuToggler[j];
-						subElem.offsetParent.classList.remove("open");
-						subElem.nextSibling.style.display = "none";
-					}
-					element.offsetParent.classList.add("open");
-					element.nextSibling.style.display = "block";
-				}
-				});
-			}
-		}
-	}
+  const mobileMenuToggleHandler = () => {
+    let windowWidthCheck = window.innerWidth;
+    setWindowWidth(windowWidthCheck);
+    window.addEventListener("resize", (e) => {
+      let windowWidth = window.innerWidth;
+      setWindowWidth(windowWidth);
+    });
+    let subMenuToggler = document.getElementsByClassName("submenu-link");
+    if (windowWidth < 992) {
+      for (let i = 0; i < subMenuToggler.length; i++) {
+        let element = subMenuToggler[i];
+        element.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (element.offsetParent.classList.contains("open")) {
+            for (let j = 0; j < subMenuToggler.length; j++) {
+              const subElem = subMenuToggler[j];
+              subElem.offsetParent.classList.remove("open");
+              subElem.nextSibling.style.display = "none";
+            }
+          } else {
+            for (let j = 0; j < subMenuToggler.length; j++) {
+              const subElem = subMenuToggler[j];
+              subElem.offsetParent.classList.remove("open");
+              subElem.nextSibling.style.display = "none";
+            }
+            element.offsetParent.classList.add("open");
+            element.nextSibling.style.display = "block";
+          }
+        });
+      }
+    }
+  }
 
-	useEffect(() => {
-		mobileMenuToggleHandler();
-	}, [windowWidth]);
+  useEffect(() => {
+    mobileMenuToggleHandler();
+  }, [windowWidth]);
 
   return (
     <>
@@ -72,27 +72,26 @@ const Nav = () => {
           </Link>
         </div>
         <ul className="mainmenu">
-          {HeaderMenu.map((menuItem, index) =>
-            menuItem.hasChildren == true ? (
-              <li className="menu-item-has-children" key={index}>
-                <Link className="submenu-link" href={menuItem.url}>
-                  {menuItem.name}
-                </Link>
+          {HeaderMenu.map((menuItem) => (
+            <li key={menuItem.name} className={menuItem.children?.length > 0 ? "menu-item-has-children" : ""}>
+              <Link className="submenu-link" href={menuItem.url}>
+                {menuItem.name}
+              </Link>
+              {menuItem.children?.length > 0 && (
                 <ul className="axil-submenu">
-                  {menuItem.children.map((submenu, index) => (
-                    <li key={index}>
-                      <Link onClick={() => mobileMneuHandler(false)} href={submenu.url}>{submenu.name}</Link>
+                  {menuItem.children.map((submenu) => (
+                    <li key={submenu.name}>
+                      <Link href={submenu.url} onClick={() => mobileMneuHandler(false)}>
+                        {submenu.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
-              </li>
-            ) : (
-              <li key={index}>
-                <Link href={menuItem.url}>{menuItem.name}</Link>
-              </li>
-            )
-          )}
+              )}
+            </li>
+          ))}
         </ul>
+
       </nav>
       {menuOption.isMobileMenuOpen && windowWidth < 992 && (
         <div

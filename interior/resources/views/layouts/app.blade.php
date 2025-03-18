@@ -37,10 +37,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/basic.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/dropzone.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css" />
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ url('assets/img/favicons/apple-touch-icon.png') }}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ url('assets/img/favicons/favicon-32x32.png') }}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ url('assets/img/favicons/favicon-16x16.png') }}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ url('assets/img/favicons/favicon.ico') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url('assets/img/icons/logo.jpg') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url('assets/img/icons/logo.jpg') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url('assets/img/icons/logo.jpg') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ url('assets/img/icons/logo.jpg') }}">
   <link rel="manifest" href="{{ url('assets/img/favicons/manifest.json') }}">
   <meta name="msapplication-TileImage" content="{{ url('assets/img/favicons/mstile-150x150.png') }}">
   <meta name="theme-color" content="#ffffff">

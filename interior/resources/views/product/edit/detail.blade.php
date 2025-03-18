@@ -205,8 +205,7 @@ Chi tiết sản phẩm
                                     </div>
                                     <div id="preview" class="mt-3"></div>
                                 </div>
-                            </div><button id="updateBtn" class="btn btn-phoenix-primary w-100"
-                                type="button">Update</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ import { API_ENDPOINT } from "@/services/apis";
 import Swal from "sweetalert2";
 
 const ActionButtons = (props) => {
-  const user_id = useAppSelector((state) => state.auth?.user.id);
+  const user_id = useAppSelector((state) => state.auth?.user?.id);
   const quantity = 1;
   const { product_hex_id, size_id } = props.productAction;
   const formData = {

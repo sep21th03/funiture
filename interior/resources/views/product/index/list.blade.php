@@ -86,10 +86,6 @@ Danh sách sản phẩm
                         </form>
                     </div>
                     <div class="ms-xxl-auto">
-                        <button class="mbs-btn-export btn btn-link text-body me-4 px-0" onclick="exportToExcel()">
-                            <span class="fa-solid fa-file-export fs-9 me-2"></span>
-                            <span>Export Excel File</span>
-                        </button>
                         <button class="btn btn-primary" id="addBtnProduct">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-plus-lg" viewBox="0 0 16 16">
