@@ -27,7 +27,7 @@ const PosterOne = (props) => {
               <div className="col-xl-7 col-lg-6">
                 <div className="poster-countdown-thumbnail">
                     <Image 
-                    src={props.thumbnail ?? "/images/product/poster/poster-03.png"}
+                    src={"/images/product/poster/count-down.webp"}
                     alt="Poster Thumbnail"
                     width={props.thumbWidth ?? 452}
                     height={props.thumbHeight ?? 502}

@@ -469,7 +469,7 @@
 }
 
 .small-thumb-style-two {
-    .small-thumb-img {
+    .small-thumb-img:not(.slide--2) {
         img {
             width: 60px;
             height: auto;

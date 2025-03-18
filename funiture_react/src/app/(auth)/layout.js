@@ -32,8 +32,7 @@ const AuthLayout = ({children, bgImage}) => {
             </div>
             <div className="row">
                 <div className="col-xl-4 col-lg-6">
-                    <div className={`axil-signin-banner bg_image ${bgImage ? bgImage : "bg_image--10"}`}>
-                        <h3 className="title">We Offer the Best Products</h3>
+                    <div className={`axil-signin-banner bg_image `} style={{ backgroundImage: "url('/images/banner/banner.webp')" }}>
                     </div>
                 </div>
                 <div className="col-lg-6 offset-xl-2">

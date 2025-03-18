@@ -16,10 +16,10 @@ const WhoAreData = [
         text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, saepe."
     },
 ]
-const WhoAreGallery = ["/images/about/about-04.png", "/images/about/about-06.png", "/images/about/about-05.png", "/images/about/about-07.png"]
+const WhoAreGallery = ["/images/about/about-01.webp", "/images/about/about-02.webp", "/images/about/about-03.webp", "/images/about/about-04.webp"]
 
 const AboutStore = {
-    thumbnail: "/images/about/about-01.png",
+    thumbnail: "/images/about/about-01.webp",
     subtitle: "About Store",
     subtitleIcon: "far fa-shopping-basket",
     title: "Online shopping includes both buying things online.",
@@ -53,13 +53,13 @@ const AboutFeatures = [
         subtitle:"Features #01",
         title: "Solutions that work together",
         text: "Publish your eCommerce site quickly with our easy-to-use store builder— no coding required. Migrate your items from your point of sale system or turn your Instagram feed into a shopping site and start selling fast. Square Online works for all kinds of businesses—retail, restaurants, services.",
-        thumbnail: "/images/about/about-02.png"
+        thumbnail: "/images/about/about-02.webp"
     },
     {
         subtitle:"Features #02",
         title: "Solutions that work together",
         text: "Publish your eCommerce site quickly with our easy-to-use store builder— no coding required. Migrate your items from your point of sale system or turn your Instagram feed into a shopping site and start selling fast. Square Online works for all kinds of businesses—retail, restaurants, services.",
-        thumbnail: "/images/about/about-03.png"
+        thumbnail: "/images/about/about-03.webp"
     }
 
 ]

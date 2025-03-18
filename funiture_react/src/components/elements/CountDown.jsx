@@ -1,58 +1,37 @@
 'use client';
-import { useEffect, useState } from 'react';
-import Countdown, {zeroPad} from 'react-countdown';
+import Countdown from 'react-countdown';
 
-const CountDown = (props) => {
+const CountDown = ({ date, unit = true, unitShort = false }) => {
+    const zeroPad = (value) => String(value).padStart(2, "0");
 
-    const [countDownStart, setcountDownStart] = useState(false);
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
+        if (completed) {
+            return <div className="countdown-complete">Time’s up!</div>;
+        }
 
-    useEffect(() => {
-        setcountDownStart(true);
-    }, []);
-
-    const renderer = ({days, hours, minutes, seconds}) => {
         return (
-          <> 
+          <div className="countdown-container d-flex">
             <div className="countdown-section">
-                <div>
-                    <div className="countdown-number">{zeroPad(days)}</div>
-                    {props.unit && (
-                        <div className="countdown-unit">{props.unitShort ? "D" : "Day"}</div>
-                    )}
-                </div>
+                <div className="countdown-number">{zeroPad(days)}</div>
+                {unit && <div className="countdown-unit">{unitShort ? "D" : "Days"}</div>}
             </div>
             <div className="countdown-section">
-                <div>
-                    <div className="countdown-number">{zeroPad(hours)}</div>
-                    {props.unit && (
-                    <div className="countdown-unit">{props.unitShort ? "H" : "Hrs"}</div>
-                    )}
-                </div>
+                <div className="countdown-number">{zeroPad(hours)}</div>
+                {unit && <div className="countdown-unit">{unitShort ? "H" : "Hrs"}</div>}
             </div>
             <div className="countdown-section">
-                <div>
-                    <div className="countdown-number">{zeroPad(minutes)}</div>
-                    {props.unit && (
-                    <div className="countdown-unit">{props.unitShort ? "M" : "Min"}</div>
-                    )}
-                </div>
+                <div className="countdown-number">{zeroPad(minutes)}</div>
+                {unit && <div className="countdown-unit">{unitShort ? "M" : "Min"}</div>}
             </div>
             <div className="countdown-section">
-                <div>
-                    <div className="countdown-number">{zeroPad(seconds)}</div>
-                    {props.unit && (
-                    <div className="countdown-unit">{props.unitShort ? "S" : "Sec"}</div>
-                    )}
-                </div>
+                <div className="countdown-number">{zeroPad(seconds)}</div>
+                {unit && <div className="countdown-unit">{unitShort ? "S" : "Sec"}</div>}
             </div>
-          </>
+          </div>
         );
-      }
-    return ( 
-        <>
-        {countDownStart && <Countdown date={props.date ? props.date : Date.now()} renderer={renderer}/>}
-        </>
-     );
-}
- 
+    };
+
+    return <Countdown date={ Date.now() + 6000000} renderer={renderer} />;
+};
+
 export default CountDown;

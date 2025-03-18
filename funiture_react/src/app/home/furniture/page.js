@@ -107,7 +107,7 @@ const HomeFurniture = () => {
                 />
                 <div className="row">
                     {transparentProduct.slice(0, 8).map((data) => (
-                        <div className="col-xl-3 col-lg-4 col-sm-6 mt-3" key={data.id}>
+                        <div className="col-xl-3 col-lg-4 col-sm-6 mt-5" key={data.id}>
                             <ProductSeven product={data} />
                         </div>
                     ))}
@@ -156,7 +156,7 @@ const HomeFurniture = () => {
             </Section>
             <PosterOne 
              subtitleIcon="far fa-couch"
-             title="Decorate Your House with Us"
+             title="Trang trí ngôi nhà của bạn"
              thumbnail="/images/product/poster/poster-07.png"
              thumbWidth={661}
              thumbHeight={502}
@@ -194,7 +194,7 @@ const HomeFurniture = () => {
             <TestimonialOne />
             <Section pClass="pb--50">
                 <SectionTitle 
-                    title="New Arrivals"
+                    title="Sản phẩm mới"
                     subtitle="This Week’s"
                     subtitleIcon="far fa-shopping-basket"
                 />

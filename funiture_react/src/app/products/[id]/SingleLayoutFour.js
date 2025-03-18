@@ -161,9 +161,9 @@ const SingleLayoutFour = ({singleData, onRelatedProductsLoaded}) => {
                                         ))}
                                     </SlickSlider>
                                 </div>
-                                <div className="col-lg-12">
+                                {/* <div className="col-lg-12">
                                     <SlickSlider
-                                        class="small-thumb-wrapper product-small-thumb-2 small-thumb-style-two small-thumb-style-three"
+                                        class="small-thumb-wrapper small-thumb-style-two small-thumb-style-three"
                                         slidesToShow={6}
                                         infinite={false}
                                         draggable={false}
@@ -173,7 +173,7 @@ const SingleLayoutFour = ({singleData, onRelatedProductsLoaded}) => {
                                         ref={slider2Ref}
                                     >
                                         {product.product_hex && product.product_hex.map((variant, index) => (
-                                            <div className="small-thumb-img" key={index}>
+                                            <div className="small-thumb-img slide--2" key={index}>
                                                 <Image
                                                     src={`${BASE_URL}/${variant.image}`} 
                                                     height={207}
@@ -183,7 +183,7 @@ const SingleLayoutFour = ({singleData, onRelatedProductsLoaded}) => {
                                             </div>
                                         ))}
                                     </SlickSlider>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className="col-lg-6 mb--40">
