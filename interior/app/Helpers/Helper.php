@@ -13,7 +13,6 @@ function jsonResponse($status, $message = '', $data = [])
     );
 }
 
-
 if (!function_exists('getPublicPath')) {
     function getPublicPath($path = '') {
         if (file_exists(base_path('public_html'))) {
