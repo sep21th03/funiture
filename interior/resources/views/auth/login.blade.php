@@ -39,14 +39,6 @@
                                         </a>
                                         <h3 class="text-body-highlight">Đăng nhập</h3>
                                     </div>
-                                    <a href="{{ url('auth/google') }}" class="btn btn-phoenix-secondary w-100 mb-3">
-                                        <span class="fab fa-google text-danger me-2 fs-9"></span>
-                                        Đăng nhập bằng Google
-                                    </a>
-                                    <div class="position-relative">
-                                        <hr class="bg-body-secondary mt-5 mb-4" />
-                                        <div class="divider-content-center bg-body-emphasis">or use email</div>
-                                    </div>
                                     <form method="post" action="{{ route('auth.post') }}">
                                         @csrf
                                         <div class="mb-3 text-start"><label class="form-label" for="email">Email</label>
