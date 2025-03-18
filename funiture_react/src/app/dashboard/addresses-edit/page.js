@@ -7,21 +7,21 @@ import { setAddress } from "@/store/slices/authSlice";
 
 const UserAddress = () => {
     const [userInfo, setUserInfo] = useState(null);
-    const user = useAppSelector((state) => state.auth.user);
+    const user = useAppSelector((state) => state.auth?.user);
     const dispatch = useAppDispatch();
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetchUserById(user.id);
+                const response = await fetchUserById(user?.id);
                 setUserInfo(response.data);
-                dispatch(setAddress(response.data.id));
+                dispatch(setAddress(response.data?.id));
             } catch (error) {
                 console.error("Error fetching user by email:", error);
             }
         };
         fetchUser();
     }
-    , [user.id]);
+    , [user?.id]);
     return ( 
         <div className="axil-dashboard-address">
             <p className="notice-text">Các địa chỉ sau sẽ được sử dụng trên trang thanh toán theo mặc định.</p>
