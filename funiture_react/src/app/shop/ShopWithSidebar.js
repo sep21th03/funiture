@@ -1,75 +1,78 @@
-'use client';
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Section from "@/components/elements/Section";
-import ProductsData from "@/data/Products";
 import ProductOne from "@/components/product/ProductOne";
 import { slugify } from "@/utils";
-import { Category } from "@/data/ProductCategory";
-import { Gender } from "@/data/ProductAttribute";
-import { ColorAttribute } from "@/data/ProductAttribute";
-import { SizeAttribute } from "@/data/ProductAttribute";
-
+import { fetchProductData, fetchCategory } from "@/services/product";
 
 const ShopWithSidebar = () => {
-    const [filterProduct, setFilterProduct] = useState(ProductsData);
-    const [productShow, setProductShow] = useState(9);
-    const [filterText, setFilterText] = useState('');
-    const [cateToggle, setcateToggle] = useState(true);
-    const [genderToggle, setgenderToggle] = useState(true);
-    const [colorToggle, setcolorToggle] = useState(true);
-    const [sizeToggle, setsizeToggle] = useState(true);
-    const [priceRangeToggle, setpriceRangeToggle] = useState(true);
+  const [Products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categoryShow, setCategoryShow] = useState([]);
+  const [productShow, setProductShow] = useState(9);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedPrice, setSelectedPrice] = useState(null);
+  const [cateToggle, setCateToggle] = useState(true);
+  const [priceRangeToggle, setPriceRangeToggle] = useState(true);
 
-    const categoryHandler = (cateSelect) => {
-        const cateFilterProduct = ProductsData.filter((data) =>(slugify(data.pCate) === cateSelect));
-        setFilterProduct(cateFilterProduct)
-        setFilterText(cateSelect);
-    }
-    const genderHandler = (genderSelect) => {
-        const genderFilterProduct = ProductsData.filter(data => data.gender === genderSelect);
-        setFilterProduct(genderFilterProduct)
-        setFilterText(genderSelect);
-    }
-    const colorHandler = (colorSelect) => {
-        let getColorData = ProductsData.filter((items) => {
-            let colors = items.colorAttribute?.filter(color => slugify(color.color) === colorSelect)
-            return colors?.length > 0;
-        })
-        setFilterProduct(getColorData)
-        setFilterText(colorSelect);
-    }
-    const sizeHandler = (sizeSelect) => {
-        let getSizeData = ProductsData.filter((items) => {
-            let sizes = items.sizeAttribute?.filter(size => slugify(size) === sizeSelect)
-            return sizes?.length > 0;
-        })
-        setFilterProduct(getSizeData);
-        setFilterText(sizeSelect);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetchProductData();
+        setProducts(response.data);
+        setFilteredProducts(response.data); 
+      } catch (error) {
+        console.error("Error fetching product data:", error);
+      }
+    };
+    fetchData();
 
-    const priceRangeHandler = (rangeSelect) => {
-        const getPriceData = ProductsData.filter(data => data.price <= rangeSelect);
-        setFilterProduct(getPriceData);
-        setFilterText(rangeSelect);
-    }
+    const fetchCtData = async () => {
+      try {
+        const response = await fetchCategory();
+        setCategoryShow(response.data);
+      } catch (error) {
+        console.error("Error fetching category data:", error);
+      }
+    };
+    fetchCtData();
+  }, []);
 
-    const ProductShowHandler = () => {
-        setProductShow(productShow + 3);
+  useEffect(() => {
+    let filtered = Products;
+
+    if (selectedCategory) {
+      filtered = filtered.filter((product) =>
+        slugify(product.set_category_name).includes(selectedCategory)
+      );
     }
 
-    const productFilterReset = () => {
-        setFilterProduct(ProductsData);
-        setFilterText('');
+    if (selectedPrice !== null) {
+      filtered = filtered.filter((product) => product.price <= selectedPrice);
     }
 
-    const priceRangeData = [
-        50,
-        100,
-        200,
-        300,
-        400,
-        500
-    ]
+    setFilteredProducts(filtered);
+  }, [selectedCategory, selectedPrice, Products]);
+
+  const categoryHandler = (cateSelect) => {
+    setSelectedCategory(cateSelect);
+  };
+
+  const priceRangeHandler = (rangeSelect) => {
+    setSelectedPrice(rangeSelect);
+  };
+
+  const ProductShowHandler = () => {
+    setProductShow(productShow + 3);
+  };
+
+  const productFilterReset = () => {
+    setSelectedCategory(null);
+    setSelectedPrice(null);
+    setFilteredProducts(Products);
+  };
+
+  const priceRangeData = [100000, 1000000, 10000000, 100000000];
 
     return ( 
         <Section pClass="axil-shop-area">

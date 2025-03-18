@@ -15,7 +15,7 @@ const UserCart = () => {
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [showOrderDetails, setShowOrderDetails] = useState(false);
   const [orderData, setOrderData] = useState(null);
-  const userId = useAppSelector((state) => state.auth.user.id);
+  const userId = useAppSelector((state) => state.auth?.user?.id);
   const router = useRouter();
   const fee_ship = 20000;
   

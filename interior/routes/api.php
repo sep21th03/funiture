@@ -71,6 +71,9 @@ Route::get('product-detail/{id}', [ProductController::class, 'show']);
 Route::get('product-related/{id}', [ProductController::class, 'getProductsByCategory']);
 Route::get('product-set/{id}', [ProductController::class, 'getProductsBySet']);
 
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/categories', [ProductController::class, 'categories']);
+Route::get('/price-ranges', [ProductController::class, 'priceRanges']);
 
 Route::get('reviews', [ProductController::class, 'getReviews']);
 Route::get('review/{id}', [ProductController::class, 'getReviewByProduct']);
