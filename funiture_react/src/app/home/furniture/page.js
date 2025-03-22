@@ -163,7 +163,7 @@ const HomeFurniture = () => {
             />
             <Section pClass="pb--0" borderBottom="pb--80">
                 <SectionTitle
-                title="Explore our Products"
+                title="Khám phá sản phẩm"
                 subtitle="Our Products"
                 subtitleIcon="far fa-shopping-basket"
                 subColor="highlighter-secondary"

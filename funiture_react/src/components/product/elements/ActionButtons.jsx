@@ -26,7 +26,7 @@ const ActionButtons = (props) => {
     try {
       const response = await axiosInstance.post(API_ENDPOINT.CART.ADD_CART, formData);
   
-      if (response.data.status === "success") {
+      if (response.data.status == "success") {
         Swal.fire({
           title: "Thành công!",
           text: "Sản phẩm đã được thêm vào giỏ hàng.",

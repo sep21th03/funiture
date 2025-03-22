@@ -19,7 +19,7 @@ const DahsboardLayout = ({ children }) => {
     <>
       <HeaderFive headerSlider />
       <main className="main-wrapper">
-        <Breadcrumb activeItem="My Account" title="Explore All Products" />
+        <Breadcrumb activeItem="My Account" title="Thông tin chung" />
         <div className="axil-dashboard-area axil-section-gap">
           <div className="container">
             <div className="axil-dashboard-warp">

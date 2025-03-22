@@ -1,166 +1,128 @@
-import React, { useState, useEffect } from 'react'
-import ChatBot from 'react-simple-chatbot'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import { IoChatboxOutline, IoClose } from 'react-icons/io5' // Thư viện icon
+import { IoChatboxOutline, IoClose, IoSend } from 'react-icons/io5'
 
-// CSS tùy chỉnh inline
-const styles = `
-  .chatbot-container {
-    position: fixed;
-    z-index: 1000000;
-    bottom: 20px;
-    right: 20px;
-    transition: all 0.3s ease;
-  }
+const messageCache = {};
 
-  .chatbot-header {
-    background-color: #3313E8FF;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-
-  .chatbot-header button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-  }
-
-  .chatbot-container .rsc-ts-bubble {
-  color: white
-  }
-
-  .chatbot-toggle {
-    position: fixed;
-    z-index: 1000000;
-    bottom: 20px;
-    right: 20px;
-    background-color: #3313E8FF;
-    color: white;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-  }
-
-  .chatbot-toggle:hover {
-    background-color: #3313E8FF;
-  }
-
-  .chatbot-container button{
-  width: 30px;
-  margin-right: 10px;
-  }
-  .rsc-header {
-  display: none;
-  }
-  .rsc-ts-bubble {
-  background: #3313E8FF;
-  max-width: 65%;
-  }
-  .rsc-footer {
-  top: 15%;
-  bottom: 0;
-  }
-`
 
 const ChatBotComponent = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [messages, setMessages] = useState([
+    { type: 'bot', text: 'Xin chào! Tôi là chatbot hỗ trợ. Bạn cần giúp đỡ gì?', timestamp: new Date() }
+  ])
+  const [inputMessage, setInputMessage] = useState('')
+  const messageContainerRef = useRef(null)
 
-  // Hàm gọi API Flask
+  // Scroll to bottom of messages when new messages are added
+  useEffect(() => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight
+    }
+  }, [messages])
+
+  // Hàm gọi API Flask with caching
   const handleUserMessage = async (message) => {
+    // Return cached response if available
+    if (messageCache[message]) {
+      console.log(`Using cached response for: "${message}"`)
+      return messageCache[message]
+    }
     
+    console.log(`Sending new request for: "${message}"`)
     setLoading(true)
     try {
-      const response = await axios.post('http://127.0.0.1:8000/ask', {
-        message: message,
+      const response = await axios.post('https://chatbot.ts-com.vn/ask', {
+        question: message,
       })
-      setLoading(false)
+      const answer = response.data.answer || 'Không có phản hồi từ máy chủ!'
       
-      return response.data.answer || 'Không có phản hồi từ máy chủ!'
-    } catch (error) {
+      messageCache[message] = answer
+      
       setLoading(false)
-      return 'Có lỗi xảy ra, thử lại sau!'
+      return answer
+    } catch (error) {
+      const errorMsg = 'Có lỗi xảy ra, thử lại sau!'
+
+      messageCache[message] = errorMsg
+      
+      setLoading(false)
+      return errorMsg
     }
   }
 
-  // Custom Component để hiển thị phản hồi từ API
+  const formatTime = (date) => {
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
 
-  
-  const BotResponse = (props) => {
-    const previousValue = props.steps['user-input'].value;
-    console.log(previousValue);
+  const handleSendMessage = async (e) => {
+    e.preventDefault()
     
-    const [responseMessage, setResponseMessage] = useState('Đang xử lý...')
-
-    useEffect(() => {
-      const fetchResponse = async () => {
-        const response = await handleUserMessage(previousValue)
-        setResponseMessage(response)
-      }
-      fetchResponse()
-    }, [previousValue])
-
-    return <div>{loading ? 'Đang xử lý...' : responseMessage}</div>
+    if (!inputMessage.trim()) return
+    
+    const userMessage = inputMessage.trim()
+    const now = new Date();
+    setMessages(prev => [...prev, { type: 'user', text: userMessage, timestamp: now }])
+    setInputMessage('')
+    
+    // Get bot response
+    const botResponse = await handleUserMessage(userMessage)
+    
+    // Add bot response
+    setMessages(prev => [...prev, { type: 'bot', text: botResponse, timestamp: new Date() }])
   }
-
-  const steps = [
-    {
-      id: 'welcome',
-      message: 'Xin chào! Tôi là chatbot. Bạn khỏe không ?',
-      trigger: 'user-input',
-    },
-    {
-      id: 'user-input',
-      user: true,
-      trigger: 'bot-response',
-    },
-    {
-      id: 'bot-response',
-      component: <BotResponse />,
-      trigger: 'user-input',
-    },
-  ]
 
   return (
     <>
-   <style>{styles}</style>
-
       {!isOpen && (
         <div className='chatbot-toggle' onClick={() => setIsOpen(true)}>
-          <IoChatboxOutline size={24} />
-</div>
+          <IoChatboxOutline size={26} />
+        </div>
       )}
 
       {isOpen && (
         <div className='chatbot-container'>
           <div className='chatbot-header'>
-            <span>AI chatbot</span>
+            <span>Trợ lý AI</span>
             <button onClick={() => setIsOpen(false)}>
-              <IoClose size={20} />
+              <IoClose size={18} />
             </button>
           </div>
-          <ChatBot
-            steps={steps}
-            headerTitle=''
-            placeholder='Nhập tin nhắn...'
-            botDelay={500}
-            width='300px'
-            height='400px'
-            style={{ borderRadius: '0 0 10px 10px', overflow: 'hidden' }}
-          />
+          
+          <div className='message-container' ref={messageContainerRef}>
+            {messages.map((message, index) => (
+              <div 
+                key={index} 
+                className={`message ${message.type === 'bot' ? 'bot-message' : 'user-message'}`}
+              >
+                {message.text}
+                <div className="message-time">{formatTime(message.timestamp)}</div>
+              </div>
+            ))}
+            
+            {loading && (
+              <div className="loading">
+                <div className="typing-indicator">
+                  <div className="typing-dot"></div>
+                  <div className="typing-dot"></div>
+                  <div className="typing-dot"></div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <form className='input-container' onSubmit={handleSendMessage}>
+            <input
+              type='text'
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              placeholder='Nhập tin nhắn của bạn...'
+              disabled={loading}
+            />
+            <button type='submit' disabled={loading || !inputMessage.trim()}>
+              <IoSend size={18} />
+            </button>
+          </form>
         </div>
       )}
     </>
