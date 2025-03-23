@@ -1,28 +1,28 @@
 'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { mapInSlices, slugify } from '@/utils';
-import FooterTwo from "@/components/footer/FooterTwo";
-import HeaderFive from "@/components/header/HeaderFive";
-import NewsLetter from "@/components/newsletter/NewsLetter";
-import ServiceTwo from "@/components/services/ServiceTwo";
-import ProductsData from '@/data/Products';
+import WhoWeAre from '@/components/about/WhoWeAre';
+import CategoryFurniture from '@/components/category/CategoryFurniture';
+import CountDown from '@/components/elements/CountDown';
 import Section from '@/components/elements/Section';
 import SectionTitle from '@/components/elements/SectionTitle';
 import SlickSlider from '@/components/elements/SlickSlider';
+import FooterTwo from "@/components/footer/FooterTwo";
+import HeaderFive from "@/components/header/HeaderFive";
+import BannerFive from '@/components/hero-banner/BannerFive';
+import NewsLetter from "@/components/newsletter/NewsLetter";
+import PosterOne from '@/components/poster/PosterOne';
+import Preloader from '@/components/preloader/Preloader';
+import ProductFour from '@/components/product/ProductFour';
+import ProductOne from '@/components/product/ProductOne';
+import ProductSeven from '@/components/product/ProductSeven';
+import ProductThree from '@/components/product/ProductThree';
 import ProductTwo from '@/components/product/ProductTwo';
+import ServiceTwo from "@/components/services/ServiceTwo";
 import TestimonialOne from '@/components/testimonial/TestimonialOne';
 import WhyChoose from '@/components/why-choose/WhyChoose';
-import PosterOne from '@/components/poster/PosterOne';
-import BannerFive from '@/components/hero-banner/BannerFive';
-import CategoryFurniture from '@/components/category/CategoryFurniture';
-import CountDown from '@/components/elements/CountDown';
-import ProductFour from '@/components/product/ProductFour';
-import ProductSeven from '@/components/product/ProductSeven';
-import WhoWeAre from '@/components/about/WhoWeAre';
-import ProductThree from '@/components/product/ProductThree';
-import ProductOne from '@/components/product/ProductOne';
-import {fetchProductData} from '@/services/product';
+import { fetchProductData } from '@/services/product';
+import { mapInSlices } from '@/utils';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const HomeFurniture = () => {
@@ -46,6 +46,7 @@ const HomeFurniture = () => {
     const exploreProduct = mapInSlices(furnitureProduct, 8);
     return ( 
         <>
+        <Preloader/>
         <HeaderFive headerSlider />
         <main className="main-wrapper">
             <BannerFive />

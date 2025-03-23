@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "@/styles/style.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ChatBotComponent from "@/components/widget/ChatbotComponent";
+import Preloader from "@/components/preloader/Preloader";
 
 const RootLayout = ({ children }) => {
   useEffect(() => {
@@ -26,10 +27,11 @@ const RootLayout = ({ children }) => {
         />
       </head>
       <body suppressHydrationWarning={true}>
-          <QueryClientProvider client={queryClient}>
-            <Providers>{children}</Providers>
-          </QueryClientProvider>
-          <ChatBotComponent />
+        <Preloader />
+        <QueryClientProvider client={queryClient}>
+          <Providers>{children}</Providers>
+        </QueryClientProvider>
+        <ChatBotComponent />
       </body>
     </html>
   );
