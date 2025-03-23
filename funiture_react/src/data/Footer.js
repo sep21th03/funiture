@@ -69,9 +69,9 @@ const FooterData = {
         }
     ],
     footerInfo: {
-        address: "685 Market Street, <br /> Las Vegas, LA 95820, <br /> United States.",
+        address: "Chũng Na <br /> Bá Xuyê, Sông Công <br /> Thái Nguyên.",
         email: "example@domain.com",
-        phone: "(+01) 850-315-5862"
+        phone: "0793157708"
     },
     footerAppInfo: {
         title: "Save $3 With App & New User only",

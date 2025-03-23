@@ -15,7 +15,7 @@ const FooterTwo = () => {
         <div className="footer-top separator-top">
           <div className="container">
             <div className="row">
-              <div className="col-lg-3 col-sm-6">
+              <div className="col-lg-4 col-sm-6">
                 <div className="axil-footer-widget">
                   <h5 className="widget-title">Support</h5>
                   <div className="inner">
@@ -42,7 +42,7 @@ const FooterTwo = () => {
                 </div>
               </div>
               {FooterData.footerLink.slice(0, 2).map((items, index) => (
-                <div className="col-lg-3 col-sm-6" key={index}>
+                <div className="col-lg-4 col-sm-6" key={index}>
                   <div className="axil-footer-widget">
                     <h5 className="widget-title">{items.label}</h5>
                     <div className="inner">
@@ -57,42 +57,7 @@ const FooterTwo = () => {
                   </div>
                 </div>
               ))}
-              <div className="col-lg-3 col-sm-6">
-                <div className="axil-footer-widget">
-                  <h5 className="widget-title">Download App</h5>
-                  <div className="inner">
-                    <span>{FooterData.footerAppInfo.title}</span>
-                    <div className="download-btn-group">
-                      <div className="qr-code">
-                        <Image
-                          src={FooterData.footerAppInfo.qrCode}
-                          alt="Axilthemes"
-                          height={98}
-                          width={98}
-                        />
-                      </div>
-                      <div className="app-link">
-                        <a href={FooterData.footerAppInfo.appStoreLink}>
-                          <Image
-                            src={FooterData.footerAppInfo.appStoreLogo}
-                            alt="App Store"
-                            height={42}
-                            width={140}
-                          />
-                        </a>
-                        <a href={FooterData.footerAppInfo.googlePlayLink}>
-                          <Image
-                            src={FooterData.footerAppInfo.googlePlayLogo}
-                            alt="Google Play Store"
-                            height={42}
-                            width={140}
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            
             </div>
           </div>
         </div>
@@ -121,13 +86,13 @@ const FooterTwo = () => {
               <div className="col-xl-4 col-lg-12">
                 <div className="copyright-left d-flex flex-wrap justify-content-center">
                   <ul className="quick-link">
-                    <li>
-                      © {new Date().getFullYear()}. All rights reserved by {" "}
-                      <a target="_blank" href="https://axilthemes.com/">
-                        Axilthemes
-                      </a>
-                      .
-                    </li>
+                  <li>
+                    © {new Date().getFullYear()}. All rights reserved by {" "}
+                    <a target="_blank">
+                      Hảo Mai
+                    </a>
+                    .
+                  </li>
                   </ul>
                 </div>
               </div>
@@ -166,7 +131,6 @@ const FooterTwo = () => {
           </div>
         </div>
       </footer>
-      {/* {getQuickView.quickView && <ProductQuickView />} */}
     </>
   );
 };

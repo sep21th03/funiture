@@ -5,13 +5,13 @@ const SplashFooter = () => {
         <div className="container">
           <div className="copyright-left d-flex flex-wrap justify-content-center">
             <ul className="quick-link">
-              <li>
-                © {new Date().getFullYear()}. All rights reserved by {" "}
-                <a target="_blank" href="https://axilthemes.com/">
-                  Axilthemes
-                </a>
-                .
-              </li>
+            <li>
+                    © {new Date().getFullYear()}. All rights reserved by {" "}
+                    <a target="_blank">
+                      Hảo Mai
+                    </a>
+                    .
+                  </li>
             </ul>
           </div>
         </div>
