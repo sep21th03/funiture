@@ -117,7 +117,7 @@ const ContactUs = () => {
                         <div className="axil-google-map-wrap axil-section-gap pb--0">
                             <div className="mapouter">
                                 <div className="gmap_canvas">
-                                    <iframe width={1080} height={500} id="gmap_canvas" src="https://maps.google.com/maps?q=melbourne&t=&z=13&ie=UTF8&iwloc=&output=embed" />
+                                    <iframe width={1080} height={500} id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29696.61613586908!2d105.82857375!3d21.50470305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135204cd147fb41%3A0xa938d73abaaa4631!2zQsOhIFh1ecOqbiwgVHAuIFPDtG5nIEPDtG5nLCBUaMOhaSBOZ3V5w6pu!5e0!3m2!1svi!2s!4v1742714824002!5m2!1svi!2s" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" />
                                 </div>
                             </div>
                         </div>
