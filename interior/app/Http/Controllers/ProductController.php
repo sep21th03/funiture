@@ -133,6 +133,7 @@ class ProductController extends Controller
                         'hex_code' => trim($hex->hex_code),
                         'sizes' => $hex->sizes->map(function ($size) {
                             return [
+                                'id' => $size->id,
                                 'size' => $size->size,
                                 'price' => (int) $size->price,
                                 'stock' => (int) $size->stock,

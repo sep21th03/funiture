@@ -10,6 +10,7 @@ use App\Models\ProductReview;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use App\Models\SetCategory;
 use App\Models\Set;
 
 class ProductService
@@ -191,21 +192,17 @@ class ProductService
             ->get();
     }
 
-    public function getProductsBySet($setId)
+    public function getProductsBySet($setCategoryId)
     {
-        $set_category = Set::find($setId);
-        if (!$set_category) {
-            return [
-                'status' => 'error',
-                'message' => 'Danh mục không tồn tại!',
-                'data' => []
-            ];
-        }
+    
+        $setCategoryIds = SetCategory::where('set_id', $setCategoryId)->pluck('id'); 
+    
         return Product::with(['categories', 'productHex', 'productHex.sizes'])
-            ->where('set_category_id', $setId)
+            ->whereIn('set_category_id', $setCategoryIds)
             ->limit(10)
             ->get();
     }
+    
     
 
     public function update($data)
