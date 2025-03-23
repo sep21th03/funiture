@@ -12,7 +12,7 @@ const Shop = ({searchParams}) => {
         <>
         <Preloader />
         <HeaderFive headerCampaign />
-        <Breadcrumb activeItem="Shop" title="Explore All Products" />
+        <Breadcrumb activeItem="Shop" title="Khám phá sản phẩm" />
         <main className="main-wrapper">
             {searchParams.layout === "no-sidebar" ? <ShopNoSidebar />:<ShopWithSidebar />}
             <NewsLetter />

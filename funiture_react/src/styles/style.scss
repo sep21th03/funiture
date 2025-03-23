@@ -145,11 +145,18 @@ Dark Style
 /* ===============================
 RTL Style
 ================================== */
+
+
+/* ===============================
+Pre loader
+================================== */
+
 .preloader {
+    overflow: hidden;
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: #ffffff;
+    background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,11 +166,19 @@ RTL Style
 .spinner {
     width: 50px;
     height: 50px;
-    border: 5px solid rgba(0, 0, 0, 0.1);
-    border-top: 5px solid #007bff;
+    border: 5px solid #ccc;
+    border-top-color: #007bff;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 
 @keyframes spin {
     0% {
@@ -241,13 +256,16 @@ RTL Style
         opacity: 0.3;
     }
 }
+/* ===============================
+Chat bot
+================================== */
 
 .chatbot-container {
     position: fixed;
     z-index: 1000000;
     bottom: 20px;
     right: 3%;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
     width: 350px;
     max-width: 90vw;
     background: white;
@@ -258,8 +276,14 @@ RTL Style
     height: 550px;
     max-height: 80vh;
     overflow: hidden;
-    animation: fadeIn 0.3s ease-out;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeIn  .5s ease-out;
+
+}
+
+.chatbot-container.closed {
+    transform: scale(0.8);  
+    opacity: 0;
+    pointer-events: none; 
 }
 
 .chatbot-header {
@@ -541,30 +565,17 @@ RTL Style
 
 }
 
-// preloader
-.preloader {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #ccc;
-    border-top-color: #007bff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    100% {
-        transform: rotate(360deg);
+@media (min-width: 1350px) {
+    .ctf-product-contaner .thumbnail {
+        width: 300px;
+        height: 300px;
     }
+    
+    .ctf-product-contaner .thumbnail a,
+    .ctf-product-contaner .thumbnail img  {
+        height: 100%;
+    }
+    
+    
 }

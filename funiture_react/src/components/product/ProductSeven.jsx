@@ -53,7 +53,7 @@ const ProductSeven = ({ product }) => {
     }
   };
   return (
-    <div className="axil-product product-style-seven">
+    <div className="ctf-product-contaner axil-product product-style-seven">
       <div className="product-content">
         <div className="cart-btn">
           <button onClick={() => handleAddToCart(product)}>
