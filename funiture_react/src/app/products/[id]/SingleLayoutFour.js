@@ -1,14 +1,12 @@
 "use client";
 import SlickSlider from "@/components/elements/SlickSlider";
-import PriceDisplay from "@/components/widget/PriceDisplay";
-import { fetchRelatedProduct, fetchSingleProduct } from '@/services/product';
-import { addToCart, addToWishlist } from "@/store/slices/productSlice";
-import { fetchSingleProduct, fetchRelatedProduct } from "@/services/product";
-import { useEffect, useState, useRef } from "react";
-import { useAppSelector } from "@/store/hooks";
-import axiosInstance from "../../../utils/axiosInstance";
 import { API_ENDPOINT } from "@/services/apis";
+import { fetchRelatedProduct, fetchSingleProduct } from '@/services/product';
+import { useAppSelector } from "@/store/hooks";
+import { addToWishlist } from "@/store/slices/productSlice";
+import { useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
+import axiosInstance from "../../../utils/axiosInstance";
 
 const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const user_id = useAppSelector((state) => state.auth?.user?.id);
