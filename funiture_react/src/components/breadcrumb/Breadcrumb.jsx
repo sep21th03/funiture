@@ -24,18 +24,6 @@ const Breadcrumb = (props) => {
                 <h1 className="title">{props.title}</h1>
               </div>
             </div>
-            <div className="col-lg-6 col-md-4">
-              <div className="inner">
-                <div className="bradcrumb-thumb">
-                    <Image 
-                    src="/images/product/product-45.png"
-                    width={126}
-                    height={120}
-                    alt="Image"
-                    />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

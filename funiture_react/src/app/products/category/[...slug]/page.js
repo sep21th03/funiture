@@ -5,6 +5,7 @@ import Section from "@/components/elements/Section";
 import ProductOne from "@/components/product/ProductOne";
 import { unSlugifyTVName, unSlugifyTV } from "@/utils";
 import { fetchCategory, fetchProductByCategory } from "@/services/product";
+import Preloader from "@/components/preloader/Preloader";
 
 const CategoryProduct = ({ params }) => {
   const catParam = params.slug[params.slug.length - 1];
@@ -39,6 +40,7 @@ const CategoryProduct = ({ params }) => {
   }, [catParam, Category]);
   return (
     <>
+    <Preloader />
       <Breadcrumb
         activeItem="Category"
         title={unSlugifyTVName(catParam, Category)}

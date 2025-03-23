@@ -12,7 +12,7 @@ const WhoWeAre = () => {
         <div className="row align-items-center">
           <div className="col-lg-7">
             <SectionTitle
-              title="Who we are"
+              title="Về chúng tôi"
               subtitle="About Us"
               subtitleIcon="fal fa-star"
               subColor="highlighter-primary2"

@@ -1,7 +1,7 @@
 "use client";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
 import SlickSlider from "@/components/elements/SlickSlider";
+import PriceDisplay from "@/components/widget/PriceDisplay";
+import { fetchRelatedProduct, fetchSingleProduct } from '@/services/product';
 import { addToCart, addToWishlist } from "@/store/slices/productSlice";
 import { fetchSingleProduct, fetchRelatedProduct } from "@/services/product";
 import { useEffect, useState, useRef } from "react";

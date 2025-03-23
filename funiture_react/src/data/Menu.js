@@ -7,15 +7,9 @@ const HeaderMenu = [
     },
     {
         name: "Shop",
-        url: "#",
+        url: "/shop",
         hasChildren: true,
        
-    },
-    {
-        name: "Pages",
-        url: "#",
-        hasChildren: true,
-    
     },
     {
         name: "About",
@@ -186,11 +180,6 @@ const DashboardAsideMenu = [
         icon: "fas fa-shopping-basket",
         name: "Đơn hàng",
         slug: "/dashboard/orders"
-    },
-    {
-        icon: "fas fa-file-download",
-        name: "Downloads",
-        slug: "/dashboard/downloads"
     },
     {
         icon: "fas fa-home",

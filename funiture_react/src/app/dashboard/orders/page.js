@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axiosInstance from "../../../utils/axiosInstance";
 import { API_ENDPOINT } from "../../../services/apis";
+import PriceDisplay from "@/components/widget/PriceDisplay";
 
 const UserOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -44,7 +45,7 @@ const UserOrders = () => {
                   <td>{order.created_at}</td>
                   <td>{order.status}</td>
                   <td>
-                    ${order.total_price}
+                  <PriceDisplay price={order.total_price} />
                   </td>
                   <td>
                     <Link

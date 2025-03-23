@@ -92,7 +92,7 @@ const OrderDetails = ({
       </div>
 
       <div className="row">
-        <div className="col-lg-7">
+        <div className="col-lg-8">
           <div className="card mb-4">
             <div className="card-header">
               <h5>Thông tin nhận hàng</h5>
@@ -187,8 +187,7 @@ const OrderDetails = ({
             </div>
           </div>
         </div>
-
-        <div className="col-lg-5">
+        <div className="col-lg-4">
           <div className="card">
             <div className="card-header">
               <h5>Tổng đơn hàng</h5>
@@ -230,7 +229,7 @@ const OrderDetails = ({
               </div>
 
               <button
-                className="btn btn-primary w-100"
+                className="btn btn-lg btn-primary w-100"
                 onClick={placeOrder}
                 disabled={loading}
               >
@@ -248,6 +247,7 @@ const OrderDetails = ({
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

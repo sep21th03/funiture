@@ -8,7 +8,7 @@ const WhyChoose = () => {
       <Section pClass="axil-why-choose-area" sectionPadding="axil-section-gap pb--50 pb_sm--30">
         <SectionTitle
           pClass="section-title-center"
-          title="Tại sao lại lựa chọn cúng tôi"
+          title="Tại sao lại lựa chọn chúng tôi"
           subtitle="Why Us"
           subtitleIcon="fal fa-thumbs-up"
           subColor="highlighter-secondary"

@@ -221,14 +221,14 @@ const UserCart = () => {
                   <td>
                     <div className="qty-control d-flex align-items-center">
                       <button
-                        className="btn btn-sm btn-outline-secondary"
+                        className="btn btn-lg btn-outline-secondary"
                         onClick={() => handleDecrement(cart.id)}
                         disabled={quantityUpdates[cart.id] <= 1}
                       >
                         -
                       </button>
                       <input
-                        type="number"
+                        type="text"
                         min="1"
                         max="100"
                         className="form-control form-control-sm mx-2"
@@ -246,14 +246,14 @@ const UserCart = () => {
                         }
                       />
                       <button
-                        className="btn btn-sm btn-outline-secondary"
+                        className="btn btn-lg btn-outline-secondary"
                         onClick={() => handleIncrement(cart.id)}
                         disabled={quantityUpdates[cart.id] >= 100}
                       >
                         +
                       </button>
                       <button
-                        className="btn btn-sm btn-primary ms-2"
+                        className="btn btn-lg btn-primary ms-2"
                         onClick={() => updateCartItem(cart)}
                         disabled={cart.quantity === quantityUpdates[cart.id]}
                       >
@@ -264,7 +264,7 @@ const UserCart = () => {
                   <td>{cart.total_amount.toLocaleString("vi-VN")} ₫</td>
                   <td className="text-center">
                     <button
-                      className="btn btn-sm btn-danger w-50"
+                      className="btn btn-lg btn-danger w-50"
                       onClick={() => removeCartItem(cart.id)}
                     >
                       <i className="fas fa-trash"></i>
@@ -346,7 +346,7 @@ const UserCart = () => {
                       </div>
 
                       <button
-                        className="btn btn-primary w-100"
+                        className="btn btn-lg btn-primary w-100"
                         onClick={prepareOrder}
                         disabled={loading}
                       >
