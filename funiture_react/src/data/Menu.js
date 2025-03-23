@@ -7,15 +7,9 @@ const HeaderMenu = [
     },
     {
         name: "Shop",
-        url: "#",
+        url: "/shop",
         hasChildren: true,
        
-    },
-    {
-        name: "Pages",
-        url: "#",
-        hasChildren: true,
-    
     },
     {
         name: "About",
