@@ -1,12 +1,11 @@
 'use client';
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
 import SlickSlider from "@/components/elements/SlickSlider";
-import { addToCart, addToWishlist } from "@/store/slices/productSlice";
-import ProductRating from "@/components/product/elements/ProductRating";
-import { fetchSingleProduct, fetchRelatedProduct } from '@/services/product';
-import { useEffect, useState, useRef } from 'react';
 import PriceDisplay from "@/components/widget/PriceDisplay";
+import { fetchRelatedProduct, fetchSingleProduct } from '@/services/product';
+import { addToCart, addToWishlist } from "@/store/slices/productSlice";
+import Image from "next/image";
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
     const dispatch = useDispatch();
@@ -90,7 +89,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
 
     const handleAddToCart = () => {
         if (!selectedVariant || (selectedVariant.sizes.length > 0 && !selectedSize)) {
-            alert("Please select a variant and size");
+            alert("Vui lòng chọn loại sản phẩm");
             return;
         }
 
@@ -176,9 +175,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                             <span className="price-discount">{<PriceDisplay price={product.discount} />}% Off</span>
                                         )}
                                     </div>
-
                                     <p>{product.set}</p>
-
                                     <div className="product-variations-wrapper">
                                         {product.product_hex && product.product_hex.length > 0 && (
                                             <div className="product-variation">
@@ -200,7 +197,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                                 </div>
                                             </div>
                                         )}
-
                                         {selectedVariant && selectedVariant.sizes && selectedVariant.sizes.length > 0 && (
                                             <div className="product-variation product-size-variation">
                                                 <h6 className="title">Size:</h6>
@@ -218,7 +214,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                             </div>
                                         )}
                                     </div>
-
                                     <div className="product-action-wrapper d-flex-center">
                                         <div className="pro-qty">
                                             <span className="qtybtn" onClick={decrementQuantity}>-</span>
@@ -230,26 +225,19 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                                 <button
                                                     disabled={!selectedVariant || (selectedVariant.sizes && selectedVariant.sizes.length > 0 && !selectedSize)}
                                                     onClick={handleAddToCart}
-                                                    className="axil-btn btn-bg-primary"
-                                                >
+                                                    className="axil-btn btn-bg-primary">
                                                     Thêm vào giỏ hàng
                                                 </button>
                                             </li>
-                                            <li className="wishlist">
-                                                <button className="axil-btn wishlist-btn" onClick={handleAddToWishlist}>
-                                                    <i className={isWishlistAdded && isWishlistAdded.length > 0 ? "fas fa-heart" : "far fa-heart"} />
-                                                </button>
-                                            </li>
+
                                         </ul>
                                     </div>
-
                                     <div className="product-desc-wrapper pt--80 pt_sm--60">
                                         <h4 className="primary-color mb--40 desc-heading">Mô tả</h4>
                                         <div className="single-desc mb--30">
                                             <h5 className="title">{product.name}</h5>
                                             <p>{product.set}</p>
                                         </div>
-
                                         {selectedVariant && (
                                             <div className="single-desc mb--30">
                                                 <h5 className="title">Product Details</h5>
@@ -265,7 +253,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                                 </ul>
                                             </div>
                                         )}
-
                                         {product.discount > 0 && (
                                             <div className="single-desc">
                                                 <h5 className="title">Special Offer</h5>
