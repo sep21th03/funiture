@@ -10,6 +10,9 @@ import {
 import axiosInstance from "../../../utils/axiosInstance";
 import { useRouter } from "next/navigation"; 
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { API_ENDPOINT } from "@/services/apis";
+
 
 const ActionButtons = (props) => {
   const [mounted, setMounted] = useState(false);
@@ -44,29 +47,21 @@ const ActionButtons = (props) => {
       } else {
         Swal.fire({
           title: "Lỗi!",
-          text: "Vui lòng đăng nhập để đặt hàng.",
-          icon: "warning",
-        }).then(() => {
-          if (mounted) {
-            router.push("/sign-in");
-          }
+          text: "Có lỗi xảy ra khi thêm vào giỏ hàng.",
+          icon: "error",
         });
       }
     } catch (error) {
-      console.log("Lỗi khi thêm vào giỏ hàng:", error);
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
       Swal.fire({
         title: "Lỗi!",
-        text: "Vui lòng đăng nhập để đặt hàng.",
-        icon: "warning",
-      }).then(() => {
-        if (mounted) {
-          router.push("/sign-in");
-        }
+        text: "Không thể kết nối đến máy chủ. Vui lòng thử lại sau.",
+        icon: "error",
       });
     }
   };
 
-  if (!mounted) return null;
+  if (!mounted) return <p>Loading...</p>;
 
   return (
     <ul className="cart-action">

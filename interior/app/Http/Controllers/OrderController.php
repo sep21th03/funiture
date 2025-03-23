@@ -137,10 +137,27 @@ class OrderController extends Controller
     public function vnpayPaymentComplete(Request $request, $order_id)
     {
         $url_return = $request->url_return;
-        $this->orderService->updateByCode($order_id, [
-            'status' => Order::STATUS_SUCCESS,
-        ]);
-
+        
+        if ($request->has('vnp_ResponseCode') && $request->vnp_ResponseCode === '00') {
+            $this->orderService->updateByCode($order_id, [
+                'status' => Order::STATUS_SUCCESS,
+                'payment_status' => Order::PAYMENT_STATUS_PAID,
+            ]);
+        } 
+        // } else {
+        //     // Thanh toán thất bại hoặc bị hủy
+        //     // Nếu muốn hủy đơn hàng khi thanh toán thất bại, thì cập nhật status
+        //     // $this->orderService->updateByCode($order_id, [
+        //     //     'status' => Order::STATUS_CANCELLED,
+        //     //     'payment_status' => Order::PAYMENT_STATUS_FAILED,
+        //     // ]);
+            
+        //     // Hoặc chỉ cập nhật trạng thái thanh toán
+        //     $this->orderService->updateByCode($order_id, [
+        //         'payment_status' => Order::PAYMENT_STATUS_FAILED,
+        //     ]);
+        // }
+        
         return redirect($url_return);
     }
     /**

@@ -39,6 +39,6 @@
     "sass": "^1.62.1",
     "sharp": "^0.32.4",
     "slick-carousel": "^1.8.1",
-    "sweetalert2": "^11.7.5"
+    "sweetalert2": "^11.17.2"
   }
 }

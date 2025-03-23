@@ -56,9 +56,9 @@ const OrderDetails = ({
           const paymentResponse = await axiosInstance.post(API_ENDPOINT.ORDER.VNPAY, {
             order_id: orderDetails.code,
             amount: orderDetails.total_price,
-            url_return: `${window.location.origin}/dashboard/cart/order-success/${orderDetails.code}`
+            url_return: `${window.location.origin}/dashboard/cart/payment-result/${orderDetails.code}`
           });
-
+          
           if (paymentResponse.data.code === '00') {
             window.location.href = paymentResponse.data.data;
           } else {
@@ -74,8 +74,7 @@ const OrderDetails = ({
     } finally {
       setLoading(false);
     }
-};
-
+  };
 
   return (
     <div className="axil-order-details">
