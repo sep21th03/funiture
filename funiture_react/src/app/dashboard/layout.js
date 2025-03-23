@@ -36,7 +36,7 @@ const DahsboardLayout = ({ children }) => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-xl-2 col-md-3">
+                <div className="col-xl-3 col-md-3">
                   <aside className="axil-dashboard-aside __custom">
                     <nav className="axil-dashboard-nav">
                       <div className="nav nav-tabs">
@@ -62,7 +62,7 @@ const DahsboardLayout = ({ children }) => {
                     </nav>
                   </aside>
                 </div>
-                <div className="col-xl-10 col-md-9">
+                <div className="col-xl-9 col-md-9">
                   <div>{children}</div>
                 </div>
               </div>

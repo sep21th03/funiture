@@ -188,11 +188,6 @@ const DashboardAsideMenu = [
         slug: "/dashboard/orders"
     },
     {
-        icon: "fas fa-file-download",
-        name: "Downloads",
-        slug: "/dashboard/downloads"
-    },
-    {
         icon: "fas fa-home",
         name: "Thông tin nhận hàng",
         slug: "/dashboard/addresses-edit"

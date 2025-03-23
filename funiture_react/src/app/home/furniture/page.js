@@ -48,8 +48,8 @@ const HomeFurniture = () => {
         <>
         <HeaderFive headerSlider />
         <main className="main-wrapper">
-            <CategoryFurniture />
             <BannerFive />
+            <CategoryFurniture />
             <Section 
             pClass="axil-new-arrivals-product-area fullwidth-container flash-sale-area pb--0"
             containerClass="ml--xxl-0"

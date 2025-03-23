@@ -65,7 +65,8 @@ const OrderView = () => {
             <div className="order-address">
                 <h2 className="block-title">Địa chỉ nhận hàng</h2>
                 <address>
-               {order?.address} <br />
+              <br />
+               <p className="address-addresss"><i className="fa-sharp fa-thin fa-house"></i> {order?.address}</p>
                 <p className="address-phone"><i className="far fa-phone"></i> {order?.phone}</p>
                 <p className="address-email"><i className="far fa-envelope"></i> {order?.user?.email}</p>
                 </address>
