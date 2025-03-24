@@ -9,14 +9,14 @@ Countdown
         background-color: var(--color-white);
         border-radius: 50%;
         margin-right: 15px;
-        display: flex;  
+        display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center; 
+        text-align: center;
         @media #{$md-layout} {
             height: 70px;
             width: 70px;
-        } 
+        }
         @media #{$sm-layout} {
             height: 60px;
             width: 60px;
@@ -34,7 +34,7 @@ Countdown
     }
     .countdown-number {
         font-size: 24px;
-        font-weight: var(--s-medium);
+        font-weight: var(--s-semi-bold);
         color: var(--color-black);
         line-height: 1;
         margin-bottom: 5px;
@@ -47,7 +47,7 @@ Countdown
     }
     .countdown-unit {
         line-height: 1;
-        font-size: 14px;
+        font-size: 24px;
         font-weight: var(--s-medium);
     }
 }
@@ -60,20 +60,20 @@ Countdown
         margin-right: 25px;
         position: relative;
         &:after {
-            content:":";
+            content: ":";
             font-size: var(--font-size-b2);
             color: var(--color-heading);
-            font-weight: var(--s-medium);
+            font-weight: var(--s-semi-bold);
             position: absolute;
             right: -14px;
         }
     }
     .countdown-number {
         margin-bottom: 0;
-        font-size: var(--font-size-b2);
+        font-size: var(--font-size-b1);
         color: var(--color-heading);
     }
-    .countdown-unit {   
+    .countdown-unit {
         display: none;
     }
 }

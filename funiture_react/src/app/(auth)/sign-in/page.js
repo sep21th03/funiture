@@ -20,7 +20,7 @@ const SignIn = () => {
   const onSubmit = (data) => {
     login(data, dispatch, router, setLoginError);
   };
-
+  console.log("loginError", loginError);
   return (
     <AuthLayout bgImage="bg_image--9">
       <div className="axil-signin-form">
@@ -57,7 +57,7 @@ const SignIn = () => {
             </Link>
           </div>
           {loginError && (
-            <p className="error">User and Password doesn&apos;t match</p>
+            <p className="error">{loginError}</p>
           )}
         </form>
       </div>

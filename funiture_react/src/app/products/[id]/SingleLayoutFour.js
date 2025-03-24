@@ -1,16 +1,19 @@
 "use client";
 import SlickSlider from "@/components/elements/SlickSlider";
 import { API_ENDPOINT } from "@/services/apis";
-import { fetchRelatedProduct, fetchSingleProduct } from '@/services/product';
+import { fetchRelatedProduct, fetchSingleProduct } from "@/services/product";
 import { useAppSelector } from "@/store/hooks";
 import { addToWishlist } from "@/store/slices/productSlice";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axiosInstance from "../../../utils/axiosInstance";
-
+import Image from "next/image";
 const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const user_id = useAppSelector((state) => state.auth?.user?.id);
   const dispatch = useDispatch();
+  const router = useRouter();
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
   const [quantity, setquantity] = useState(1);
@@ -55,7 +58,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
       }
     };
     fetchData();
-
     if (product.product_hex && product.product_hex.length > 0) {
       setSelectedVariant(product.product_hex[0]);
       if (
@@ -93,40 +95,46 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const incrementQuantity = () => {
     setquantity(quantity + 1);
   };
-  const formData = {
-    user_id,
-    product_hex_id: selectedVariant?.id,
-    size_id: selectedSize?.id || null,
-    quantity,
-  };
+
   const handleAddToCart = async () => {
+    if (!user_id) {
+      Swal.fire({
+        title: "Lỗi!",
+        text: "Vui lòng đăng nhập để đặt hàng.",
+        icon: "error",
+      }).then(() => {
+        router.push("/sign-in");
+      });
+      return;
+    }
+
     try {
-        const response = await axiosInstance.post(API_ENDPOINT.CART.ADD_CART, formData);
-    
-        if (response.data.status === "success") {
-          Swal.fire({
-            title: "Thành công!",
-            text: "Sản phẩm đã được thêm vào giỏ hàng.",
-            icon: "success",
-            timer: 1500, 
-            showConfirmButton: false,
-            timerProgressBar: true,
-          });
-        } else {
-          Swal.fire({
-            title: "Lỗi!",
-            text: "Không thể thêm sản phẩm vào giỏ hàng.",
-            icon: "error",
-          });
-        }
-      } catch (error) {
-        console.error("Lỗi khi thêm vào giỏ hàng:", error);
-        Swal.fire({
-          title: "Lỗi!",
-          text: "Đã xảy ra lỗi, vui lòng thử lại sau.",
-          icon: "error",
-        });
-      }
+      const response = await axiosInstance.post(API_ENDPOINT.CART.ADD_CART, {
+        user_id,
+        product_hex_id: selectedVariant?.id,
+        size_id: selectedSize?.id || null,
+        quantity: quantity,
+      });
+
+      Swal.fire({
+        title: response.data.status === "success" ? "Thành công!" : "Lỗi!",
+        text:
+          response.data.status === "success"
+            ? "Sản phẩm đã được thêm vào giỏ hàng."
+            : "Có lỗi xảy ra khi thêm vào giỏ hàng.",
+        icon: response.data.status === "success" ? "success" : "error",
+        timer: 1500,
+        showConfirmButton: false,
+        timerProgressBar: true,
+      });
+    } catch (error) {
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
+      Swal.fire({
+        title: "Lỗi!",
+        text: "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.",
+        icon: "error",
+      });
+    }
   };
 
   const handleAddToWishlist = () => {
@@ -168,7 +176,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                     focusOnSelect={true}
                     adaptiveHeight={true}
                     asNavFor={nav2}
-                    // ref={(slider1 => setNav1(slider1))}
                     ref={slider1Ref}
                   >
                     {product.product_hex &&
@@ -184,29 +191,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                       ))}
                   </SlickSlider>
                 </div>
-                {/* <div className="col-lg-12">
-                                    <SlickSlider
-                                        class="small-thumb-wrapper small-thumb-style-two small-thumb-style-three"
-                                        slidesToShow={6}
-                                        infinite={false}
-                                        draggable={false}
-                                        focusOnSelect={true}
-                                        asNavFor={nav1}
-                                        // ref={(slider2 => setNav2(slider2))}
-                                        ref={slider2Ref}
-                                    >
-                                        {product.product_hex && product.product_hex.map((variant, index) => (
-                                            <div className="small-thumb-img slide--2" key={index}>
-                                                <Image
-                                                    src={`${BASE_URL}/${variant.image}`} 
-                                                    height={207}
-                                                    width={213}
-                                                    alt={`${product.name} - ${variant.hex_code} Thumbnail`}
-                                                />
-                                            </div>
-                                        ))}
-                                    </SlickSlider>
-                                </div> */}
               </div>
             </div>
             <div className="col-lg-6 mb--40">

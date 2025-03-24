@@ -17,10 +17,10 @@ const OrderSuccess = ({params}) => {
             Cảm ơn bạn đã đặt hàng. Đơn hàng {orderCode} của bạn đã được xác nhận và đang được xử lý.
           </p>
           <div className="d-flex justify-content-center">
-            <Link href="/dashboard/orders" className="btn btn-primary me-2">
+            <Link href="/dashboard/orders" className="btn btn-lg btn-primary me-2">
               Xem đơn hàng của tôi
             </Link>
-            <Link href="/" className="btn btn-outline-primary">
+            <Link href="/" className="btn btn-lg btn-outline-primary">
               Tiếp tục mua sắm
             </Link>
           </div>

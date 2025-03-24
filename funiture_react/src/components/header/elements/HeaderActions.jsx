@@ -1,37 +1,34 @@
 import Link from "next/link";
-import { useState, useEffect  } from "react";
+import { useState, useEffect } from "react";
 import ProductSearchModal from "@/components/header/elements/ProductSearchModal";
 import MiniCart from "@/components/header/elements/MiniCart";
-import { miniCartHandler } from "@/store/slices/productSlice";
-import { mobileMenu } from "@/store/slices/menuSlice";
-import { useAppSelector } from "@/store/hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
+import { logOut } from "@/store/slices/authSlice";
+import { useRouter } from "next/navigation";
 
 const HeaderActions = (props) => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const [searchToggle, setSearchToggle] = useState(false);
   const [accountDropdown, setaccountDropdown] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logOut());
+    router.push("/sign-in");
+  };
 
-  
   const searchBoxToggleHandler = () => {
     setSearchToggle((toggler) => !toggler);
   };
   const accountDropdownToggler = () => {
     setaccountDropdown((toggler) => !toggler);
   };
-  // const cartHandler = (data) => {
-  //   dispatch(miniCartHandler(data));
-  // }
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
-// const mobileMneuHandler = (data) => {
-//   dispatch(mobileMenu(data))
-// }
-
-useEffect(() => {
-  setIsClient(true);
-}, []);
-
-if (!isClient) return null;
+  if (!isClient) return null;
 
   return (
     <div className="header-action">
@@ -61,7 +58,6 @@ if (!isClient) return null;
           </li>
         )}
 
-       
         <li className="my-account">
           <button onClick={accountDropdownToggler}>
             <i className="far fa-user" />
@@ -71,39 +67,47 @@ if (!isClient) return null;
           >
             <span className="title">Tiện ích</span>
             {isAuthenticated ? (
-        <ul>
-          <li>
-            <Link href="/dashboard">Tài khoản của tôi</Link>
-          </li>
-          <li>
-            <Link href="/dashboard/cart">Giỏ hàng</Link>
-          </li>
-          <li>
-            <Link href="/dashboard/account-details">Cài đặt</Link>
-          </li>
-          <li>
-            <Link href="/sign-in" className="axil-btn btn-bg-primary">Đăng xuất</Link>
-          </li>
-        </ul>
-      ) : (
-        <>
-          <div className="login-btn">
-            <Link href="/sign-in" className="axil-btn btn-bg-primary">
-              Login
-            </Link>
-          </div>
-          <div className="reg-footer text-center">
-            No account yet?
-            <Link href="/sign-up" className="btn-link">
-              REGISTER HERE.
-            </Link>
-          </div>
-        </>
-      )}
+              <ul>
+                <li>
+                  <Link href="/dashboard">Tài khoản của tôi</Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/cart">Giỏ hàng</Link>
+                </li>
+                <li>
+                  <Link href="/dashboard/account-details">Cài đặt</Link>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogout}
+                    className="axil-btn btn-bg-primary"
+                  >
+                    Đăng xuất
+                  </button>
+                </li>
+              </ul>
+            ) : (
+              <>
+                <div className="login-btn">
+                  <Link href="/sign-in" className="axil-btn btn-bg-primary">
+                    Login
+                  </Link>
+                </div>
+                <div className="reg-footer text-center">
+                  No account yet?
+                  <Link href="/sign-up" className="btn-link">
+                    REGISTER HERE.
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </li>
         <li className="axil-mobile-toggle">
-          <button className="menu-btn mobile-nav-toggler" onClick={() => mobileMneuHandler(true)}>
+          <button
+            className="menu-btn mobile-nav-toggler"
+            onClick={() => mobileMneuHandler(true)}
+          >
             <i className="fal fa-bars"></i>
           </button>
         </li>

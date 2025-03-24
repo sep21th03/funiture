@@ -127,6 +127,7 @@ class ProductController extends Controller
                 'set_category_id' => $product->set_category_id,
                 'set' => $product->categories->set->name . ' - ' . $product->categories->name,
                 'discount' => $product->discount,
+                'url' => "products/{$product->id}",
                 'product_hex' => $product->productHex->map(function ($hex) {
                     return [
                         'id' => $hex->id,
@@ -146,7 +147,6 @@ class ProductController extends Controller
             ]
         ]);
     }
-
     public function getProductsByCategory($id){
         $products = $this->productService->getProductsByCategory($id);
         return $products
