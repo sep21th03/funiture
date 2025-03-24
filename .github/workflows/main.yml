@@ -1,22 +1,19 @@
 on: push
 name: 🚀 Deploy website on push
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: 116.107.162.253
-        username: trieuhoangduc
-        password: 43FnEYkJRfsTFmFF
-        protocol: ftps
-        port: 21
-        local-dir: ./funiture_react/
-        exclude: |
-          **/.git*
-          **/.git*/**
+    web-deploy:
+        name: 🎉 Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🚚 Get latest code
+              uses: actions/checkout@v4
+            - name: 📂 Sync files
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+              with:
+                  server: 116.107.162.253
+                  username: trieuhoangduc
+                  password: 43FnEYkJRfsTFmFF
+                  local-dir: ./funiture_react/
+                  exclude: |
+                      **/.git*
+                      **/.git*/**

@@ -1,6 +1,11 @@
 "use client";
-import Link from "next/link";
 import { useAppSelector } from "@/store/hooks";
+import {
+  addToCart,
+  addToWishlist,
+  removeWishlistItem,
+  addToQuickView,
+} from "@/store/slices/productSlice";
 import axiosInstance from "../../../utils/axiosInstance";
 import { useRouter } from "next/navigation"; 
 import { useEffect, useState } from "react";
