@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axiosInstance from "../../../utils/axiosInstance";
 import Image from 'next/image';
+import PriceDisplay from "@/components/widget/PriceDisplay";
 const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const user_id = useAppSelector((state) => state.auth?.user?.id);
   const dispatch = useDispatch();
@@ -202,12 +203,12 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                       {product.discount && product.discount > 0 ? (
                         <>
                           <del className="old-price me-5">
-                            ${getPrice().toLocaleString()}
+                            <PriceDisplay price={getPrice()} />
                           </del>
-                          ${getDiscountedPrice().toLocaleString()}
+                          <PriceDisplay price={getDiscountedPrice()} />
                         </>
                       ) : (
-                        `$${getPrice().toLocaleString()}`
+                        <PriceDisplay price={getPrice()} />
                       )}
                     </span>
                     {product.discount && product.discount > 0 && (
@@ -228,9 +229,9 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                             {product.product_hex.map((variant, index) => (
                               <li
                                 className={`${selectedVariant &&
-                                    selectedVariant.id === variant.id
-                                    ? "active"
-                                    : ""
+                                  selectedVariant.id === variant.id
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() => colorVariantHandler(variant)}
@@ -294,16 +295,14 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                               !selectedSize)
                           }
                           onClick={handleAddToCart}
-                          className="axil-btn btn-bg-primary"
-                        >
-                          Add to Cart
+                          className="axil-btn btn-bg-primary">
+                          Thêm vào giỏ hangf
                         </button>
                       </li>
                       <li className="wishlist">
                         <button
                           className="axil-btn wishlist-btn"
-                          onClick={handleAddToWishlist}
-                        >
+                          onClick={handleAddToWishlist}>
                           <i
                             className={
                               isWishlistAdded && isWishlistAdded.length > 0
