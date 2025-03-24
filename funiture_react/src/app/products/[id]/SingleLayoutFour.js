@@ -15,7 +15,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const user_id = useAppSelector((state) => state.auth?.user?.id);
   const dispatch = useDispatch();
   const router = useRouter();
-  const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
   const [quantity, setquantity] = useState(1);
   const [product, setProduct] = useState({});
@@ -24,7 +23,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const slider1Ref = useRef(null);
   const slider2Ref = useRef(null);
   useEffect(() => {
-    setNav1(slider1Ref.current);
     setNav2(slider2Ref.current);
   }, []);
   const BASE_URL = process.env.NEXT_PUBLIC_IMAGE_API_URL;
@@ -38,6 +36,8 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
           const relatedResponse = await fetchRelatedProduct(
             response.data.set_category_id
           );
+          console.log(response.data.set_category_id);
+
           relatedProducts = relatedResponse.data;
           if (onRelatedProductsLoaded) {
             onRelatedProductsLoaded(relatedProducts);
@@ -270,6 +270,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                       )}
                   </div>
 
+
                   <div className="product-action-wrapper d-flex-center">
                     <div className="pro-qty">
                       <span className="qtybtn" onClick={decrementQuantity}>
@@ -285,7 +286,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                         +
                       </span>
                     </div>
-                    <ul className="product-action d-flex-center mb--0">
+                    <ul className={`${selectedSize?.stock == 0 ? "d-none" : "d-block"} product-action d-flex-center mb--0`}>
                       <li className="add-to-cart">
                         <button
                           disabled={
@@ -296,46 +297,32 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                           }
                           onClick={handleAddToCart}
                           className="axil-btn btn-bg-primary">
-                          Thêm vào giỏ hangf
-                        </button>
-                      </li>
-                      <li className="wishlist">
-                        <button
-                          className="axil-btn wishlist-btn"
-                          onClick={handleAddToWishlist}>
-                          <i
-                            className={
-                              isWishlistAdded && isWishlistAdded.length > 0
-                                ? "fas fa-heart"
-                                : "far fa-heart"
-                            }
-                          />
+                          Thêm vào giỏ hàng
                         </button>
                       </li>
                     </ul>
                   </div>
 
                   <div className="product-desc-wrapper pt--80 pt_sm--60">
-                    <h4 className="primary-color mb--40 desc-heading">
-                      Description
+                    <h4 className="primary-color mb-3 desc-heading">
+                      Mô tả
                     </h4>
                     <div className="single-desc">
-                      <h5 className="title">{product.name}</h5>
                       <p>{product.set}</p>
                     </div>
 
                     {selectedVariant && (
                       <div className="single-desc mb--30">
-                        <h5 className="title">Product Details</h5>
+                        <h5 className="title my-3">Thông tin chi tiết</h5>
                         <ul>
-                          <li>Variant: {selectedVariant.hex_code}</li>
+                          <li>Loại: {selectedVariant.hex_code}</li>
                           {selectedSize && (
                             <>
-                              <li>Size: {selectedSize.size}</li>
+                              <li>Kích thước: {selectedSize.size}</li>
                               <li>
-                                Price: ${selectedSize.price.toLocaleString()}
+                                Giá: <PriceDisplay price={selectedSize.price} />
                               </li>
-                              <li>Stock: {selectedSize.stock} available</li>
+                              <li>Sản phẩm còn lại: <strong className="text-danger">{selectedSize.stock}</strong> sản phẩm</li>
                             </>
                           )}
                         </ul>
