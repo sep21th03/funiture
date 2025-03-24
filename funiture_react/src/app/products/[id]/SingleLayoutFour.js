@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import axiosInstance from "../../../utils/axiosInstance";
-
+import Image from 'next/image';
 const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
   const user_id = useAppSelector((state) => state.auth?.user?.id);
   const dispatch = useDispatch();
@@ -191,29 +191,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                       ))}
                   </SlickSlider>
                 </div>
-                {/* <div className="col-lg-12">
-                                    <SlickSlider
-                                        class="small-thumb-wrapper small-thumb-style-two small-thumb-style-three"
-                                        slidesToShow={6}
-                                        infinite={false}
-                                        draggable={false}
-                                        focusOnSelect={true}
-                                        asNavFor={nav1}
-                                        // ref={(slider2 => setNav2(slider2))}
-                                        ref={slider2Ref}
-                                    >
-                                        {product.product_hex && product.product_hex.map((variant, index) => (
-                                            <div className="small-thumb-img slide--2" key={index}>
-                                                <Image
-                                                    src={`${BASE_URL}/${variant.image}`} 
-                                                    height={207}
-                                                    width={213}
-                                                    alt={`${product.name} - ${variant.hex_code} Thumbnail`}
-                                                />
-                                            </div>
-                                        ))}
-                                    </SlickSlider>
-                                </div> */}
               </div>
             </div>
             <div className="col-lg-6 mb--40">
@@ -240,8 +217,6 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                     )}
                   </div>
 
-                  {/* {product.reviews && <ProductRating rating={product.reviews} textEnable/>} */}
-
                   <p>{product.set}</p>
 
                   <div className="product-variations-wrapper">
@@ -252,12 +227,11 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                           <ul className="color-variant justify-content-evenly">
                             {product.product_hex.map((variant, index) => (
                               <li
-                                className={`${
-                                  selectedVariant &&
-                                  selectedVariant.id === variant.id
+                                className={`${selectedVariant &&
+                                    selectedVariant.id === variant.id
                                     ? "active"
                                     : ""
-                                }`}
+                                  }`}
                                 key={index}
                                 onClick={() => colorVariantHandler(variant)}
                               >
@@ -280,7 +254,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                 key={index}
                                 className={
                                   selectedSize &&
-                                  selectedSize.size === sizeOption.size
+                                    selectedSize.size === sizeOption.size
                                     ? "active"
                                     : ""
                                 }
