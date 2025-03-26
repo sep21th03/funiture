@@ -1,23 +1,33 @@
-import React, { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
-import { IoChatboxOutline, IoClose, IoSend } from 'react-icons/io5'
+import { useEffect, useRef, useState } from 'react';
+import { FaHeadset, FaMicrophone } from 'react-icons/fa';
+import { IoChatboxOutline, IoClose, IoSend } from 'react-icons/io5';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import axios from 'axios';
 
 const messageCache = {};
 
 const ChatBotComponent = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
-    { type: 'bot', text: 'Xin chào! Tôi là chatbot hỗ trợ. Bạn cần giúp đỡ gì?', timestamp: new Date() }
-  ])
-  const [inputMessage, setInputMessage] = useState('')
-  const messageContainerRef = useRef(null)
+    { type: 'bot', text: 'Xin chào! Tôi là chatbot hỗ trợ. Bạn cần giúp đỡ gì?', timestamp: new Date() },
+  ]);
+  const { transcript, listening, resetTranscript, startListening, stopListening } = useSpeechRecognition();
+  const [inputMessage, setInputMessage] = useState('');
+  const messageContainerRef = useRef(null);
+
+
+  useEffect(() => {
+    setInputMessage(transcript);
+
+  }, [transcript]);
+
 
   useEffect(() => {
     if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight
+      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
     }
-  }, [messages])
+  }, [messages]);
 
   const handleUserMessage = async (message) => {
     if (messageCache[message]) {
@@ -35,12 +45,10 @@ const ChatBotComponent = () => {
       let answer = response.data.answer || 'Không có phản hồi từ máy chủ!';
       let httpsLinks = [];
 
-      // Extract HTTPS links from the answer
       const linkRegex = /(https?:\/\/[^\s]+)/g;
       const foundLinks = answer.match(linkRegex);
       if (foundLinks) {
         httpsLinks = foundLinks;
-        // Remove links from the answer
         answer = answer.replace(linkRegex, '');
       }
 
@@ -53,14 +61,11 @@ const ChatBotComponent = () => {
       return { answer, httpsLinks };
     } catch (error) {
       const errorMsg = 'Có lỗi xảy ra, thử lại sau!';
-
       messageCache[message] = { answer: errorMsg, httpsLinks: [] };
-
       setLoading(false);
       return { answer: errorMsg, httpsLinks: [] };
     }
   };
-
 
 
   const formatTime = (date) => {
@@ -68,43 +73,44 @@ const ChatBotComponent = () => {
   };
 
   const handleSendMessage = async (e) => {
-    e.preventDefault()
-
-    if (!inputMessage.trim()) return
-
-    const userMessage = inputMessage.trim()
+    e.preventDefault();
+    if (!inputMessage.trim()) return;
+    const userMessage = inputMessage.trim();
     const now = new Date();
-    setMessages(prev => [...prev, { type: 'user', text: userMessage, timestamp: now }])
-    setInputMessage('')
-
-    const botResponse = await handleUserMessage(userMessage)
-
-    setMessages(prev => [...prev, { type: 'bot', text: botResponse.answer, httpsLinks: botResponse.httpsLinks, timestamp: new Date() }])
-  }
+    setMessages((prev) => [...prev, { type: 'user', text: userMessage, timestamp: now }]);
+    setInputMessage('');
+    const botResponse = await handleUserMessage(userMessage);
+    setMessages((prev) => [...prev, { type: 'bot', text: botResponse.answer, httpsLinks: botResponse.httpsLinks, timestamp: new Date() }]);
+  };
 
   return (
     <>
       {!isOpen && (
-        <div className='chatbot-toggle' onClick={() => setIsOpen(true)}>
-          <IoChatboxOutline size={26} />
+        <div className="chatbot-closed">
+          <div className="ctf-header-chat">
+            <FaHeadset size={20} className="headset-icon mr-x" />
+            <span>Chat với AI </span>
+            <div>
+            </div>
+          </div>
+          <div className="chatbot-toggle" onClick={() => setIsOpen(true)}>
+            <IoChatboxOutline size={26} />
+          </div>
         </div>
       )}
 
       {isOpen && (
-        <div className='chatbot-container'>
-          <div className='chatbot-header'>
-            <span>Trợ lý AI</span>
+        <div className="chatbot-container">
+          <div className="chatbot-header">
+            <span>Trợ lý AI <p>Microphone: {listening ? 'on' : 'off'}</p></span>
             <button onClick={() => setIsOpen(false)}>
               <IoClose size={18} />
             </button>
           </div>
 
-          <div className='message-container' ref={messageContainerRef}>
+          <div className="message-container" ref={messageContainerRef}>
             {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`message ${message.type === 'bot' ? 'bot-message' : 'user-message'}`}
-              >
+              <div key={index} className={`message ${message.type === 'bot' ? 'bot-message' : 'user-message'}`}>
                 {message.type === 'bot' ? (
                   <>
                     {message.text}
@@ -116,7 +122,6 @@ const ChatBotComponent = () => {
                           </a>
                         ))}
                       </div>
-
                     )}
                   </>
                 ) : (
@@ -136,23 +141,27 @@ const ChatBotComponent = () => {
               </div>
             )}
           </div>
-
-          <form className='input-container' onSubmit={handleSendMessage}>
+          <form className="input-container" onSubmit={handleSendMessage}>
             <input
-              type='text'
+              type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder='Nhập tin nhắn của bạn...'
+              placeholder="Nhập tin nhắn của bạn..."
               disabled={loading}
             />
-            <button type='submit' disabled={loading || !inputMessage.trim()}>
-              <IoSend size={18} />
-            </button>
+            <div className="button-group">
+              <button type="button" onClick={SpeechRecognition.startListening}>
+                <FaMicrophone size={18} />
+              </button>
+              <button type="submit" disabled={loading || (!inputMessage.trim() && !transcript.trim())}>
+                <IoSend size={18} />
+              </button>
+            </div>
           </form>
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
 export default ChatBotComponent;

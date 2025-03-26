@@ -146,7 +146,6 @@ Dark Style
 RTL Style
 ================================== */
 
-
 /* ===============================
 Pre loader
 ================================== */
@@ -177,8 +176,6 @@ Pre loader
         transform: rotate(360deg);
     }
 }
-
-
 
 @keyframes spin {
     0% {
@@ -276,14 +273,13 @@ Chat bot
     height: 550px;
     max-height: 80vh;
     overflow: hidden;
-    animation: fadeIn  .5s ease-out;
-
+    animation: fadeIn 0.5s ease-out;
 }
 
 .chatbot-container.closed {
-    transform: scale(0.8);  
+    transform: scale(0.8);
     opacity: 0;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .chatbot-header {
@@ -339,6 +335,18 @@ Chat bot
     box-shadow: 0 4px 15px rgba(51, 19, 232, 0.3);
     transition: all 0.3s ease;
     animation: pulse 2s infinite;
+}
+
+.ctf-header-chat {
+    position: fixed;
+    z-index: 999;
+    bottom: 90px;
+    background: linear-gradient(135deg, rgb(87, 60, 241), #5040ff);
+    right: 3.5%;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
 
 .chatbot-toggle:hover {
@@ -557,37 +565,41 @@ Chat bot
 }
 
 .ctf-product-title {
-    white-space: nowrap;     
-    overflow: hidden;        
-    text-overflow: ellipsis;  
-    max-width: 280px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
     display: block;
-
 }
 
-
 @media (min-width: 1023px) {
-    .ctf-product-contaner .thumbnail, 
+    .ctf-product-contaner .thumbnail,
     .product-style-one .thumbnail,
     .product-style-seven {
         width: 300px;
         height: 300px;
     }
-    
+
     .ctf-product-contaner .thumbnail a,
     .ctf-product-contaner .thumbnail img,
     .product-style-one a,
     .product-style-one img {
         height: 100%;
     }
-    
-    
 }
 
 .message.bot-message a {
-    color: #FF0003;
+    color: #ff0003;
 }
 
 .message.bot-message a:hover {
     color: #ffffff;
+}
+.button-group {
+    display: flex;
+    margin-left: 5px;
+}
+
+.button-group button {
+    margin-left: 5px;
 }
