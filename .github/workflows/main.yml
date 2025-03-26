@@ -10,7 +10,7 @@ jobs:
             - name: 📂 Sync files
               uses: SamKirkland/FTP-Deploy-Action@v4.3.5
               with:
-                  server: 116.107.162.253
+                  server: 116.107.165.198
                   username: trieuhoangduc
                   password: 43FnEYkJRfsTFmFF
                   local-dir: ./funiture_react/
