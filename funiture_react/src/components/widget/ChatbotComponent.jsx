@@ -4,7 +4,6 @@ import { IoChatboxOutline, IoClose, IoSend } from 'react-icons/io5'
 
 const messageCache = {};
 
-
 const ChatBotComponent = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -14,40 +13,39 @@ const ChatBotComponent = () => {
   const [inputMessage, setInputMessage] = useState('')
   const messageContainerRef = useRef(null)
 
-  // Scroll to bottom of messages when new messages are added
   useEffect(() => {
     if (messageContainerRef.current) {
       messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight
     }
   }, [messages])
 
-  // Hàm gọi API Flask with caching
   const handleUserMessage = async (message) => {
-    // Return cached response if available
     if (messageCache[message]) {
       console.log(`Using cached response for: "${message}"`)
       return messageCache[message]
     }
-    
+
     console.log(`Sending new request for: "${message}"`)
     setLoading(true)
     try {
       const response = await axios.post('https://chatbot.ts-com.vn/ask', {
         question: message,
       })
-      const answer = response.data.answer || 'Không có phản hồi từ máy chủ!'
-      
-      messageCache[message] = answer
-      
+
+      let answer = response.data.answer || 'Không có phản hồi từ máy chủ!'
+      let httpsLinks = response.data.https_links || [];
+
+      messageCache[message] = { answer, httpsLinks };
+
       setLoading(false)
-      return answer
+      return { answer, httpsLinks };
     } catch (error) {
       const errorMsg = 'Có lỗi xảy ra, thử lại sau!'
 
-      messageCache[message] = errorMsg
-      
+      messageCache[message] = { answer: errorMsg, httpsLinks: [] };
+
       setLoading(false)
-      return errorMsg
+      return { answer: errorMsg, httpsLinks: [] };
     }
   }
 
@@ -57,19 +55,17 @@ const ChatBotComponent = () => {
 
   const handleSendMessage = async (e) => {
     e.preventDefault()
-    
+
     if (!inputMessage.trim()) return
-    
+
     const userMessage = inputMessage.trim()
     const now = new Date();
     setMessages(prev => [...prev, { type: 'user', text: userMessage, timestamp: now }])
     setInputMessage('')
-    
-    // Get bot response
+
     const botResponse = await handleUserMessage(userMessage)
-    
-    // Add bot response
-    setMessages(prev => [...prev, { type: 'bot', text: botResponse, timestamp: new Date() }])
+
+    setMessages(prev => [...prev, { type: 'bot', text: botResponse.answer, httpsLinks: botResponse.httpsLinks, timestamp: new Date() }])
   }
 
   return (
@@ -88,18 +84,33 @@ const ChatBotComponent = () => {
               <IoClose size={18} />
             </button>
           </div>
-          
+
           <div className='message-container' ref={messageContainerRef}>
             {messages.map((message, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`message ${message.type === 'bot' ? 'bot-message' : 'user-message'}`}
               >
-                {message.text}
+                {message.type === 'bot' ? (
+                  <>
+                    {message.text}
+                    {message.httpsLinks && message.httpsLinks.length > 0 && (
+                      <div>
+                        {message.httpsLinks.map((link, linkIndex) => (
+                          <a key={linkIndex} href={link} target="_blank" rel="noopener noreferrer">
+                            {link}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  message.text
+                )}
                 <div className="message-time">{formatTime(message.timestamp)}</div>
               </div>
             ))}
-            
+
             {loading && (
               <div className="loading">
                 <div className="typing-indicator">
@@ -110,7 +121,7 @@ const ChatBotComponent = () => {
               </div>
             )}
           </div>
-          
+
           <form className='input-container' onSubmit={handleSendMessage}>
             <input
               type='text'
