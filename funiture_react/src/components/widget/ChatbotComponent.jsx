@@ -21,33 +21,47 @@ const ChatBotComponent = () => {
 
   const handleUserMessage = async (message) => {
     if (messageCache[message]) {
-      console.log(`Using cached response for: "${message}"`)
-      return messageCache[message]
+      console.log(`Using cached response for: "${message}"`);
+      return messageCache[message];
     }
 
-    console.log(`Sending new request for: "${message}"`)
-    setLoading(true)
+    console.log(`Sending new request for: "${message}"`);
+    setLoading(true);
     try {
       const response = await axios.post('https://chatbot.ts-com.vn/ask', {
         question: message,
-      })
+      });
 
-      let answer = response.data.answer || 'Không có phản hồi từ máy chủ!'
-      let httpsLinks = response.data.https_links || [];
+      let answer = response.data.answer || 'Không có phản hồi từ máy chủ!';
+      let httpsLinks = [];
+
+      // Extract HTTPS links from the answer
+      const linkRegex = /(https?:\/\/[^\s]+)/g;
+      const foundLinks = answer.match(linkRegex);
+      if (foundLinks) {
+        httpsLinks = foundLinks;
+        // Remove links from the answer
+        answer = answer.replace(linkRegex, '');
+      }
+
+      console.log(answer);
+      console.log(httpsLinks);
 
       messageCache[message] = { answer, httpsLinks };
 
-      setLoading(false)
+      setLoading(false);
       return { answer, httpsLinks };
     } catch (error) {
-      const errorMsg = 'Có lỗi xảy ra, thử lại sau!'
+      const errorMsg = 'Có lỗi xảy ra, thử lại sau!';
 
       messageCache[message] = { answer: errorMsg, httpsLinks: [] };
 
-      setLoading(false)
+      setLoading(false);
       return { answer: errorMsg, httpsLinks: [] };
     }
-  }
+  };
+
+
 
   const formatTime = (date) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -102,6 +116,7 @@ const ChatBotComponent = () => {
                           </a>
                         ))}
                       </div>
+
                     )}
                   </>
                 ) : (
@@ -140,4 +155,4 @@ const ChatBotComponent = () => {
   )
 }
 
-export default ChatBotComponent
+export default ChatBotComponent;
