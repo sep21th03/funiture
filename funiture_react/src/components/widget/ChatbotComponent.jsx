@@ -102,7 +102,7 @@ const ChatBotComponent = () => {
       {isOpen && (
         <div className="chatbot-container">
           <div className="chatbot-header">
-            <span>Trợ lý AI <p>Microphone: {listening ? 'on' : 'off'}</p></span>
+            <span>Trợ lý AI <p>Microphone: {listening ? 'bật' : 'tắt'}</p></span>
             <button onClick={() => setIsOpen(false)}>
               <IoClose size={18} />
             </button>

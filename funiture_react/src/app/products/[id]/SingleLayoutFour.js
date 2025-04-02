@@ -213,7 +213,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                     </span>
                     {product.discount && product.discount > 0 && (
                       <span className="price-discount">
-                        {product.discount}% Off
+                        Giảm {product.discount}%
                       </span>
                     )}
                   </div>
@@ -223,7 +223,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                   <div className="product-variations-wrapper">
                     {product.product_hex && product.product_hex.length > 0 && (
                       <div className="product-variation">
-                        <h6 className="title">Variant:</h6>
+                        <h6 className="title">Biến thể:</h6>
                         <div className="color-variant-wrapper flex-1">
                           <ul className="color-variant justify-content-evenly">
                             {product.product_hex.map((variant, index) => (
@@ -248,7 +248,7 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                       selectedVariant.sizes &&
                       selectedVariant.sizes.length > 0 && (
                         <div className="product-variation product-size-variation">
-                          <h6 className="title">Size:</h6>
+                          <h6 className="title">Kích thước:</h6>
                           <ul className="range-variant">
                             {selectedVariant.sizes.map((sizeOption, index) => (
                               <li
@@ -261,8 +261,8 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
                                 }
                                 onClick={() => sizeHandler(sizeOption)}
                               >
-                                {sizeOption.size} - $
-                                {sizeOption.price.toLocaleString()}
+                                {sizeOption.size} - 
+                                {sizeOption.price.toLocaleString()} ₫
                               </li>
                             ))}
                           </ul>
@@ -331,8 +331,8 @@ const SingleLayoutFour = ({ singleData, onRelatedProductsLoaded }) => {
 
                     {product.discount > 0 && (
                       <div className="single-desc">
-                        <h5 className="title">Special Offer</h5>
-                        <p>Get {product.discount}% discount on this product!</p>
+                        <h5 className="title">Ưu đãi đặc biệt</h5>
+                        <p>Giảm {product.discount}% cho sản phẩm này!</p>
                       </div>
                     )}
                   </div>

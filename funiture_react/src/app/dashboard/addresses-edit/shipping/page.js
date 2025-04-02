@@ -68,23 +68,23 @@ const ShippingAddress = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" className="form-control" {...register('firstName', { required: true })} defaultValue={userShippingInfo?.name || ""} />
-                            {errors.firstName && <p className="error">Name is required.</p>}
+                            {errors.firstName && <p className="error">Tên là bắt buộc.</p>}
                         </div>
                     </div>
                     <div className="col-lg-12">
                         <div className="form-group">
-                            <label>Phone</label>
+                            <label>Số điện thoại</label>
                             <input type="tel" className="form-control" {...register('phone', { required: true })} defaultValue={userShippingInfo?.phone || ""} />
-                            {errors.phone && <p className="error">Phone Number is required.</p>}
+                            {errors.phone && <p className="error">Số điện thoại là bắt buộc.</p>}
                         </div>
                     </div>
                     <div className="col-lg-12">
                         <div className="form-group">
-                            <label>Address</label>
+                            <label>Địa chỉ</label>
                             <input type="text" className="form-control" {...register('address1', { required: true })} defaultValue={userShippingInfo?.address || ""} />
-                            {errors.address1 && <p className="error">Address is required.</p>}
+                            {errors.address1 && <p className="error">Địa chỉ là bắt buộc.</p>}
                         </div>
                     </div>
                     <div className="col-lg-12">

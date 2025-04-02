@@ -22,8 +22,8 @@ const SignUp = () => {
 
   return (
     <div className="axil-signin-form">
-      <h3 className="title">I&apos;m New Here</h3>
-      <p className="b2 mb--55">Enter your detail below</p>
+      <h3 className="title">Tôi là người mới</h3>
+      <p className="b2 mb--55">Nhập thông tin của bạn bên dưới</p>
       <form className="singin-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <label>Tên đăng nhập</label>
@@ -33,7 +33,7 @@ const SignUp = () => {
             {...register("name", { required: true })}
             placeholder="codetify"
           />
-          {errors.name && <p className="error">User Name is required.</p>}
+          {errors.name && <p className="error">Tên đăng nhập là bắt buộc.</p>}
         </div>
         <div className="form-group">
           <label>Email</label>
@@ -43,7 +43,7 @@ const SignUp = () => {
             {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
             placeholder="codetifytech.io.vn@gmail.com"
           />
-          {errors.email && <p className="error">Email is required.</p>}
+          {errors.email && <p className="error">Email là bắt buộc.</p>}
         </div>
         <div className="form-group">
           <label>Mật khẩu</label>
@@ -52,19 +52,19 @@ const SignUp = () => {
             className="form-control"
             {...register("password", { required: true, minLength: 8 })}
           />
-          {errors.password && <p className="error">Password is required.</p>}
+          {errors.password && <p className="error">Mật khẩu là bắt buộc.</p>}
         </div>
         <div className="form-group">
-          <label>Re password</label>
+          <label>Nhập lại mật khẩu</label>
           <input
             type="password"
             className="form-control"
             {...register("repassword", { required: true, minLength: 8 })}
           />
-          {errors.repassword && <p className="error">Password is required.</p>}
+          {errors.repassword && <p className="error">Nhập lại mật khẩu là bắt buộc.</p>}
         </div>
         <div className="form-group">
-          <label>Phone</label>
+          <label>Số điện thoại</label>
           <input
             type="text"
             className="form-control"
@@ -76,8 +76,7 @@ const SignUp = () => {
               },
             })}
           />
-
-          {errors.phone && <p className="error">Password is required.</p>}
+          {errors.phone && <p className="error">Số điện thoại là bắt buộc.</p>}
         </div>
         <div className="form-group">
           <label>Địa chỉ</label>
@@ -91,7 +90,7 @@ const SignUp = () => {
           <button type="submit" className="axil-btn btn-bg-primary submit-btn">
             Đăng ký
           </button>
-          {registerError && <p className="success">Account Created successfully</p>}
+          {registerError && <p className="success">Tạo tài khoản thành công</p>}
         </div>
       </form>
     </div>
